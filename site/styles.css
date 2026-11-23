@@ -56,6 +56,9 @@ h2 { font-size: clamp(26px, 3.1vw, 44px); line-height: 1.1; max-width: 22ch; }
 .puce-logo svg { width: 22px; height: auto; fill: var(--on-zest); }
 /* Le logo officiel de X, blanc, à côté du nom du compte : jamais redessiné ni recoloré. */
 .logo-x { flex: none; width: 14px; height: 14px; }
+/* Le logo officiel de GitHub, blanc, avec sa marge libre d'origine : il mène au code du site. */
+.logo-gh { flex: none; width: 22px; height: 22px; }
+.puce-gh { width: 40px; padding: 0; justify-content: center; }
 /* Un logo de tiers qui demande un fond blanc (ChatGPT, Claude, Gemini) : tel quel, dans une petite tuile blanche. */
 .logo-tuile { flex: none; display: grid; place-items: center; width: 26px; height: 26px; background: var(--logo-blanc); border-radius: 7px; }
 .logo-tuile img { display: block; width: 17px; height: 17px; }
@@ -377,6 +380,7 @@ details p { padding: 0 var(--marge) 20px; max-width: 64ch; color: var(--text-2);
 .pied-jeton strong { display: block; margin-bottom: 4px; font: 500 18px/1.3 var(--titre); letter-spacing: -.02em; color: var(--text-1); }
 .jeton-adresse { font-size: 14px; color: var(--text-2); font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
 .pied-liens a .logo-x { display: inline-block; width: 15px; height: 15px; margin-right: 9px; vertical-align: -2px; }
+.pied-liens a .logo-gh { display: inline-block; width: 22px; height: 22px; margin: 0 6px 0 -4px; vertical-align: -6px; }
 
 /* ---------- Le bandeau de démo : comme un fil d'actualité, en haut de l'app ---------- */
 .bandeau { position: relative; z-index: 41; display: flex; align-items: stretch; height: 44px; overflow: hidden; background: var(--noir); border-bottom: 1px solid var(--div-2); }
@@ -427,6 +431,7 @@ details p { padding: 0 var(--marge) 20px; max-width: 64ch; color: var(--text-2);
   .puce { height: 38px; padding: 0 12px; }
   .puce-logo { width: 38px; padding: 0; }
   .alertes { left: 16px; right: 16px; bottom: 14px; width: auto; }
+  .barre .puce-gh { display: none; }
   .pied-liens { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .plateau { grid-template-columns: repeat(4, 72px); gap: 6px; }
   .socle > img { width: 68px; height: 68px; }
