@@ -306,18 +306,19 @@ details p { padding: 0 var(--marge) 20px; max-width: 64ch; color: var(--text-2);
 .pied { position: relative; margin-top: clamp(150px, 22vh, 190px); background: var(--sheet); color: var(--text-2); }
 .pied::before { content: ""; position: absolute; left: 0; right: 0; top: -8px; height: 8px; background: conic-gradient(from 135deg at 50% 0, var(--sheet) 90deg, transparent 0) 0 0 / 16px 8px repeat-x; }
 .pied-soudure { height: 30px; background: repeating-linear-gradient(to bottom, transparent 0 5px, var(--div-2) 5px 6px); border-bottom: 1px solid var(--div-2); }
-.pied-corps { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); gap: 28px; align-items: start; max-width: var(--colonne); margin: 0 auto; padding: clamp(32px, 6vh, 56px) var(--marge) 30px; }
+.pied-corps { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(min-content, 1.5fr); gap: 28px; align-items: start; max-width: var(--colonne); margin: 0 auto; padding: clamp(32px, 6vh, 56px) var(--marge) 30px; }
 .pied-marque { display: flex; align-items: center; gap: 14px; }
 .pied-phrase { font: 500 clamp(17px, 1.5vw, 20px)/1.25 var(--titre); letter-spacing: -.02em; color: var(--text-1); }
-.pied-liens { display: grid; grid-template-columns: repeat(4, minmax(0, auto)); justify-content: space-between; gap: 20px 28px; }
+/* Aucune colonne ne passe sous la largeur de ce qu'elle porte : le logo de la chaîne ne recouvre jamais sa voisine. */
+.pied-liens { display: grid; grid-template-columns: repeat(4, auto); justify-content: space-between; gap: 20px 28px; }
 .pied-liens .logo-chaine { padding: 11px 13px; }
 .pied-liens .logo-chaine img { height: 20px; }
 .pied-liens .libelle { margin-bottom: 10px; }
-.pied-liens a { display: block; width: fit-content; padding: 4px 0; color: var(--text-1); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 120ms var(--courbe); }
+.pied-liens a { display: block; width: fit-content; padding: 4px 0; white-space: nowrap; color: var(--text-1); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 120ms var(--courbe); }
 .pied-liens a:hover { border-bottom-color: var(--zest); }
 .pied-etat { display: flex; align-items: baseline; gap: 10px; margin-bottom: 12px; font-size: 14px; }
 .voyant { flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--zest); box-shadow: 0 0 0 4px var(--zest-12); transform: translateY(-1px); }
-.puce-son { height: 44px; padding: 0 14px 0 6px; gap: 6px; }
+.puce-son { height: 44px; padding: 0 14px 0 6px; gap: 6px; white-space: nowrap; }
 .puce-son img { width: 32px; height: 32px; transition: opacity 160ms var(--courbe), transform 360ms var(--retour); }
 .puce-son:hover img { transform: rotate(-8deg) scale(1.08); }
 .puce-son[aria-pressed="false"] { color: var(--text-3); }
@@ -400,6 +401,8 @@ details p { padding: 0 var(--marge) 20px; max-width: 64ch; color: var(--text-2);
 .js .apparait.vu { opacity: 1; filter: blur(0); transform: none; }
 
 /* ---------- Tablette et téléphone ---------- */
+/* Sous 940 px, la phrase du pied n'a plus sa place à côté des quatre colonnes : elle passe au-dessus. */
+@media (max-width: 940px) { .pied-corps { grid-template-columns: minmax(0, 1fr); } }
 @media (max-width: 900px) {
   .liens { display: none; }
   .jeton-ca { display: none; }

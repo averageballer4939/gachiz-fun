@@ -192,8 +192,9 @@ body.app { overflow: hidden; }
 .compte-faits dd.baisse, .bilan dd.baisse { color: var(--down); }
 
 /* ---------- Bas : onglets, tableaux, compte ---------- */
-.onglets-rang { flex: none; display: flex; align-items: center; justify-content: space-between; gap: 10px; height: var(--pan); padding-right: var(--bord); border-bottom: 1px solid var(--div-1); }
-.onglets { position: relative; display: flex; height: 100%; padding: 0 4px; }
+/* La rangée passe sur deux lignes quand les onglets et les gestes ne tiennent plus côte à côte. */
+.onglets-rang { flex: none; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0 10px; min-height: var(--pan); padding-right: var(--bord); border-bottom: 1px solid var(--div-1); }
+.onglets { position: relative; display: flex; height: calc(var(--pan) - 1px); padding: 0 4px; }
 .onglets button {
   appearance: none; display: inline-flex; align-items: center; gap: 6px; height: 100%; padding: 0 9px; border: 0; background: none;
   color: var(--text-3); font: 600 10.5px/1 var(--texte); letter-spacing: .07em; text-transform: uppercase; white-space: nowrap; cursor: pointer;
@@ -206,7 +207,7 @@ body.app { overflow: hidden; }
 .pret .onglets-curseur { transition: transform 220ms var(--courbe), width 220ms var(--courbe); }
 .compteur { min-width: 16px; padding: 2px 4px; border-radius: 4px; background: var(--muted); color: var(--text-2); font-size: 10px; letter-spacing: 0; text-align: center; }
 .compteur.a-du-monde { background: var(--zest-12); color: var(--zest); }
-.onglets-gestes { display: flex; align-items: center; gap: 8px; padding-bottom: 2px; }
+.onglets-gestes { display: flex; align-items: center; gap: 8px; margin-left: auto; padding-bottom: 2px; }
 .panneau { flex: 1; min-height: 0; overflow: auto; scrollbar-width: thin; scrollbar-color: var(--div-2) transparent; }
 .panneau:focus-visible { outline-offset: -2px; }
 .cellule-jauge .jauge { display: inline-block; width: 40px; margin-right: 6px; vertical-align: middle; }
@@ -259,6 +260,11 @@ body.app { overflow: hidden; }
 }
 
 /* ---------- Tablette et téléphone : une colonne, le ticket sous le graphique ---------- */
+@media (min-width: 901px) and (max-width: 1320px) { .onglets-gestes .simule { display: none; } }
+@media (max-width: 1100px) {
+  .onglets-gestes { flex: 1 1 100%; justify-content: flex-end; padding: 2px 0 8px var(--bord); }
+  .onglets-gestes .pnl-total { margin-right: auto; }
+}
 @media (max-width: 900px) {
   body.app { overflow: auto; }
   .terminal { display: flex; flex-direction: column; height: auto; min-height: 0; padding-bottom: var(--etat-h); }
@@ -279,8 +285,8 @@ body.app { overflow: hidden; }
   .carnet { order: 4; border-left: 0; overflow: visible; }
   .echanges { flex: none; overflow: visible; }
   .bas { order: 5; }
-  .onglets-rang { height: auto; flex-wrap: wrap; padding-right: 0; }
-  .onglets { height: var(--pan); overflow-x: auto; scrollbar-width: none; max-width: 100%; }
+  .onglets-rang { padding-right: 0; }
+  .onglets { overflow-x: auto; scrollbar-width: none; max-width: 100%; }
   .onglets::-webkit-scrollbar { display: none; }
   .onglets-gestes { padding: 6px var(--bord) 8px; }
   .panneau { overflow: visible; }
@@ -290,8 +296,9 @@ body.app { overflow: hidden; }
   .centre.plein { top: 0; z-index: 44; }
   .app .alertes { left: 12px; right: 12px; width: auto; }
 }
-@media (max-width: 720px) {
-  /* Les tableaux du bas deviennent des fiches : une étiquette au-dessus de chaque valeur. */
+@media (max-width: 900px) {
+  /* Les tableaux du bas deviennent des fiches : une étiquette au-dessus de chaque valeur. Dès 900 px : en dessous,
+     un tableau de onze colonnes ne tient plus dans la page. */
   .bas .grille, .bas .grille tbody { display: block; }
   .bas .grille thead { display: none; }
   .bas .grille tr { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px 12px; padding: 12px var(--bord); border-bottom: 1px solid var(--div-1); }
@@ -309,3 +316,33 @@ body.app { overflow: hidden; }
 
 /* Le jeton dans la barre de l'app : seulement quand la place est là. */
 @media (max-width: 1100px) { .app .puce-jeton, .page-marches .puce-jeton { display: none; } }
+
+/* Le PnL, bien en vue : une pastille teintée par position, un filet de couleur en tête de ligne, et le total des
+   positions ouvertes en haut du panneau. */
+.pnl-pastille { display: inline-block; min-width: 70px; padding: 3px 8px; border: 1px solid var(--div-2); border-radius: 7px; font-size: 13.5px; font-weight: 700; text-align: right; transition: background-color 160ms var(--courbe), border-color 160ms var(--courbe); }
+.pnl-pastille.hausse { background: var(--zest-12); border-color: var(--zest); }
+.pnl-pastille.baisse { background: var(--down-12); border-color: var(--down); }
+td.pnl-taux { font-size: 13px; font-weight: 700; }
+#t-positions tr.gagne > td:first-child { box-shadow: inset 3px 0 0 var(--zest); }
+#t-positions tr.perd > td:first-child { box-shadow: inset 3px 0 0 var(--down); }
+.pnl-total { display: inline-flex; align-items: baseline; gap: 8px; margin: 0; padding: 2px 9px 3px; border: 1px solid var(--div-2); border-radius: 8px; font-variant-numeric: tabular-nums; white-space: nowrap; transition: background-color 160ms var(--courbe), border-color 160ms var(--courbe); }
+.pnl-total[hidden] { display: none; }
+.pnl-total > span { font: 600 10.5px/1 var(--texte); letter-spacing: .08em; text-transform: uppercase; color: var(--text-3); }
+.pnl-total > b { font-size: 15px; font-weight: 700; }
+.pnl-total > small { font-size: 12px; font-weight: 600; }
+.pnl-total.hausse { background: var(--zest-12); border-color: var(--zest); }
+.pnl-total.baisse { background: var(--down-12); border-color: var(--down); }
+.grille td.pnl-taux.hausse { color: var(--zest); }
+.grille td.pnl-taux.baisse { color: var(--down); }
+@media (max-width: 900px) {
+  #t-positions tr.gagne > td:first-child, #t-positions tr.perd > td:first-child { box-shadow: none; }
+  #t-positions tr.gagne { box-shadow: inset 3px 0 0 var(--zest); }
+  #t-positions tr.perd { box-shadow: inset 3px 0 0 var(--down); }
+  .pnl-pastille { min-width: 0; }
+}
+@media (max-width: 560px) {
+  /* Sur téléphone, le total prend sa propre ligne : rien ne dépasse de l'écran. */
+  .onglets-gestes { flex-wrap: wrap; }
+  .pnl-total { flex: 1 1 100%; }
+  .pnl-total > b { margin-left: auto; }
+}

@@ -983,12 +983,12 @@ What an open position shows, column by column, and what closing it does.
 Open the Positions tab under the chart. Read a row from left to right: market and side, size, entry and mark, the distance to liquidation, then the result so far.
 
 Tabs. Positions, Open orders, Order history, Trade history and Account, with their counts.
-Close all. Closes every open position at once.
+Open PnL. The result of all open positions together. Close all, beside it, closes them at once.
 Position. The index, the side and the leverage chosen at the open.
 Value. Size is the quantity of index. Value is margin times leverage, in credits.
 Entry, mark. The level at the open, and the level now.
 Liquidation. Liq. is the level where the position closes by itself. To liq. is the room left before it.
-PnL. The result so far, in credits and as a share of the margin, with its trace.
+PnL. The result so far, in credits and as a share of the margin. Lime when the position is up, orange when it is down.
 TP / SL, Close. Set the target and the stop loss, or close the position now.
 
 ## Column by column
@@ -1002,7 +1002,7 @@ Mark | The level now. It moves one step per second. |
 Liq. | The level where the position closes by itself. Fixed at the open. |
 To liq. | The room left before that level, in percent, with a bar that empties as the index nears it. |
 Margin | What is locked behind the position. |
-PnL | The result so far, in credits, with its trace. |
+PnL | The result so far, in credits. Its tag is lime when the position is up, orange when it is down. |
 PnL % | The same result as a share of the margin. |
 TP / SL | The target and the stop loss, or none. |
 TP / SL Close | Set the exits of the position, or close it now. |

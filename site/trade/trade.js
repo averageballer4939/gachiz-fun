@@ -1103,7 +1103,11 @@ function rendrePositions() {
     const part = piece('b')
     reste.append(jauge, part)
     nombreDans(tr, 'Margin', p.marge)
-    p.el = { marque, jauge, part, pnl: cellule(tr, 'PnL', 'num'), taux: cellule(tr, 'PnL %', 'num') }
+    // Le PnL est ce qu'on cherche d'abord dans une position : une pastille teintée, et un filet de couleur en tête de ligne.
+    const gainCase = cellule(tr, 'PnL', 'num')
+    const gainPastille = piece('span', 'pnl-pastille')
+    gainCase.append(gainPastille)
+    p.el = { rang: tr, marque, jauge, part, pnl: gainPastille, taux: cellule(tr, 'PnL %', 'num pnl-taux') }
     cellule(tr, 'TP / SL', `num${p.tp || p.sl ? '' : ' gris'}`, sorties(p))
     cellule(tr, '', 'act').append(
       bouton('TP / SL', `Set target and stop loss on ${p.code} ${p.sens}`, () => {
@@ -1179,10 +1183,16 @@ function editeur(p) {
   return tr
 }
 function majPositions() {
+  let total = 0
+  let marges = 0
   for (const p of compte.positions) {
     if (!p.el) continue
     const prix = parCode[p.code].prix
     const gain = pnlDe(p, prix)
+    total += gain
+    marges += p.marge
+    p.el.rang.classList.toggle('gagne', gain > 0.005)
+    p.el.rang.classList.toggle('perd', gain < -0.005)
     const reste = resteDe(p, prix)
     ecrire(p.el.marque, prix)
     ecrire(p.el.pnl, gain, { signe: true })
@@ -1191,6 +1201,14 @@ function majPositions() {
     ton(p.el.taux, gain)
     ecrire(p.el.part, reste * 100, { dec: 1, suffixe: '%' })
     reglerJauge(p.el.jauge, reste)
+  }
+  // Le total des positions ouvertes, en tête du panneau.
+  const boite = $('pnl-total')
+  if (boite) {
+    boite.hidden = !compte.positions.length
+    ecrire($('pnl-total-val'), total, { signe: true })
+    ecrire($('pnl-total-taux'), marges ? (total / marges) * 100 : 0, { dec: 1, signe: true, suffixe: '%' })
+    ton(boite, total)
   }
 }
 function rendreOrdres() {
