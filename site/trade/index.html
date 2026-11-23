@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; base-uri 'none'; form-action 'none'">
+<meta name="theme-color" content="#111210">
+<meta name="description" content="Gachiz trading screen, in demo: paper positions on simulated Pokémon, One Piece, Yu-Gi-Oh! and sports card indexes. No order is sent on-chain.">
+<title>Gachiz: trade (demo)</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../fonts/sora-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../fonts/saira-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="terminal.css">
+<link rel="stylesheet" href="trade.css">
+</head>
+<body class="app dense">
+
+<aside class="bandeau" aria-label="Demo notice">
+  <p class="bandeau-titre"><img src="../icons/sablier.webp" alt="" width="30" height="30">Demo · not live yet</p>
+  <div class="bandeau-fil">
+    <ul class="bandeau-piste">
+      <li><img src="../icons/machine.webp" alt="" width="32" height="32">Gachiz is in demo mode</li>
+      <li><img src="../icons/indice.webp" alt="" width="32" height="32">Index values are simulated, in points</li>
+      <li><img src="../icons/marge.webp" alt="" width="32" height="32">Paper orders and demo credits, no funds</li>
+      <li><img src="../icons/bouclier.webp" alt="" width="32" height="32">Nothing is sent on-chain</li>
+      <li><img src="../icons/cloche.webp" alt="" width="32" height="32">Launch news on X: @gachizfun</li>
+      <li aria-hidden="true"><img src="../icons/machine.webp" alt="" width="32" height="32">Gachiz is in demo mode</li>
+      <li aria-hidden="true"><img src="../icons/indice.webp" alt="" width="32" height="32">Index values are simulated, in points</li>
+      <li aria-hidden="true"><img src="../icons/marge.webp" alt="" width="32" height="32">Paper orders and demo credits, no funds</li>
+      <li aria-hidden="true"><img src="../icons/bouclier.webp" alt="" width="32" height="32">Nothing is sent on-chain</li>
+      <li aria-hidden="true"><img src="../icons/cloche.webp" alt="" width="32" height="32">Launch news on X: @gachizfun</li>
+    </ul>
+  </div>
+</aside>
+
+
+<header class="barre">
+  <div class="barre-gauche">
+    <a class="puce puce-logo" href="../" aria-label="Gachiz, home">
+      <svg viewBox="0 0 136.6 107" aria-hidden="true">
+        <polygon points="47.34,0 124.34,0 99.51,43 72.17,43 49.65,82 64.08,107 14.43,107 0,82"/>
+        <polygon points="86.6,68 136.6,68 114.08,107 64.08,107"/>
+      </svg>
+    </a>
+    <nav class="liens" aria-label="Main">
+      <a class="puce est-ici" href="./" aria-current="page">Trade</a>
+      <a class="puce" href="../markets/">Markets</a>
+      <a class="puce" href="../docs/">Docs</a>
+    </nav>
+  </div>
+  <div class="barre-droite">
+    <button class="puce puce-jeton" type="button" data-jeton aria-label="GACHIZ token: copy the contract address"><img src="../icons/marge.webp" alt="" width="30" height="30"><span class="jeton-nom">GACHIZ</span><span class="jeton-ca" data-jeton-ca>CA soon</span></button>
+    <p class="temoin"><span class="temoin-point" aria-hidden="true"></span>Demo · simulated data</p>
+    <div class="wallet">
+      <button class="puce puce-zest" id="wallet-bouton" type="button" aria-haspopup="true" aria-expanded="false">Connect</button>
+      <div class="wallet-menu" id="wallet-menu" hidden></div>
+    </div>
+  </div>
+</header>
+
+<noscript><p class="sans-script">This demo runs in the browser and needs JavaScript.</p></noscript>
+
+<main class="terminal" id="terminal">
+
+  <section class="marches apparait" aria-label="Markets">
+    <header class="pan-tete">
+      <h2 class="pan-titre">Markets</h2>
+      <label class="recherche"><span class="cache">Search an index</span><input id="cherche" type="search" placeholder="Search" autocomplete="off" spellcheck="false"></label>
+    </header>
+    <div class="liste-boite" id="liste-boite">
+      <span class="marches-curseur" aria-hidden="true"></span>
+      <table class="grille liste">
+        <thead id="liste-tete"><tr><th class="col-ep"><span class="cache">Pinned</span></th><th data-tri="code" data-sens="haut">Index</th><th class="num" data-tri="prix">Last</th><th class="num" data-tri="variation">2h %</th></tr></thead>
+        <tbody id="liste-corps"></tbody>
+      </table>
+      <p class="liste-vide" id="liste-vide" hidden>No index matches this search.</p>
+    </div>
+    <article class="fiche" aria-label="About this market">
+      <div class="fiche-tete">
+        <img id="fiche-icone" class="vignette" src="../packs/mini/pokemon.webp" alt="" height="112" decoding="async">
+        <div><p class="etiq">What it follows</p><p class="fiche-nom" id="fiche-nom">Pokémon cards</p></div>
+      </div>
+      <p class="fiche-texte" id="fiche-suit">An index of Pokémon trading-card sales.</p>
+      <dl class="fiche-faits">
+        <div><dt>Composition</dt><dd>Not announced yet</dd></div>
+        <div><dt>Price source</dt><dd>Not announced yet</dd></div>
+        <div><dt>Funding</dt><dd>Not announced yet</dd></div>
+        <div><dt>Fees</dt><dd>Not announced yet</dd></div>
+        <div><dt>Leverage</dt><dd>Not announced yet</dd></div>
+        <div><dt>On this screen</dt><dd class="fait-ici">Simulated, in points</dd></div>
+      </dl>
+      <a class="lien" href="../markets/">All four indexes</a>
+    </article>
+  </section>
+
+  <header class="entete apparait" aria-label="Market summary">
+    <div class="entete-nom">
+      <img id="entete-icone" class="vignette" src="../packs/mini/pokemon.webp" alt="" height="112" decoding="async">
+      <div><h1 id="entete-code">PKMN-IDX</h1><p id="entete-ligne">Pokémon cards</p></div>
+    </div>
+    <dl class="mesures">
+      <div class="mesure-grande"><dt>Index, pts</dt><dd id="st-prix"></dd></div>
+      <div><dt>2h change</dt><dd id="st-var"></dd></div>
+      <div><dt>2h high</dt><dd id="st-haut"></dd></div>
+      <div><dt>2h low</dt><dd id="st-bas"></dd></div>
+      <div><dt>2h range</dt><dd id="st-ampl"></dd></div>
+      <div><dt>Last candle</dt><dd id="st-bougie"></dd></div>
+      <div><dt>Paper OI · session</dt><dd id="st-oi"></dd></div>
+      <div><dt>Paper vol. · session</dt><dd id="st-vol"></dd></div>
+      <div><dt>Funding</dt><dd class="attente">Not announced yet</dd></div>
+    </dl>
+  </header>
+
+  <section class="centre apparait" id="centre" aria-label="Chart">
+    <div class="outils" role="toolbar" aria-label="Chart tools">
+      <div class="segments" id="pas" role="group" aria-label="Candle size">
+        <span class="segments-curseur" aria-hidden="true"></span>
+        <button type="button" data-v="5" aria-pressed="true">5s</button>
+        <button type="button" data-v="30" aria-pressed="false">30s</button>
+        <button type="button" data-v="120" aria-pressed="false">2m</button>
+      </div>
+      <div class="segments" id="genre" role="group" aria-label="Chart type">
+        <span class="segments-curseur" aria-hidden="true"></span>
+        <button type="button" data-v="bougies" aria-pressed="true">Candles</button>
+        <button type="button" data-v="courbe" aria-pressed="false">Line</button>
+      </div>
+      <label class="option"><button class="bascule" id="outil-mm" type="button" aria-pressed="false" aria-label="Moving average over 20 candles"></button>MA 20</label>
+      <label class="option"><button class="bascule" id="outil-vol" type="button" aria-pressed="true" aria-label="Simulated volume bars"></button>Volume</label>
+      <label class="option"><button class="bascule" id="outil-auto" type="button" aria-pressed="true" aria-label="Automatic scale"></button>Auto scale</label>
+      <span class="simule outils-fin">Simulated</span>
+      <button class="petit" id="outil-plein" type="button" aria-pressed="false">Expand</button>
+    </div>
+    <div class="graphe" id="graphe">
+      <p class="legende" id="legende" aria-hidden="true">
+        <span>O <b id="lg-o"></b></span><span>H <b id="lg-h"></b></span><span>L <b id="lg-l"></b></span><span>C <b id="lg-c"></b></span><span id="lg-var"></span><span id="lg-mm-boite" hidden>MA 20 <b id="lg-mm"></b></span><span id="lg-vol-boite">Vol <b id="lg-vol"></b></span>
+      </p>
+      <canvas id="toile-graphe" role="img" aria-label="Chart of the simulated index, in points"></canvas>
+    </div>
+  </section>
+
+  <section class="carnet apparait" id="carnet" aria-label="Order book and trades, simulated">
+    <header class="pan-tete">
+      <h2 class="pan-titre">Book</h2>
+      <span class="simule">Simulated</span>
+      <div class="segments" id="groupe" role="group" aria-label="Price grouping, in points">
+        <span class="segments-curseur" aria-hidden="true"></span>
+        <button type="button" data-v="1" aria-pressed="true"></button>
+        <button type="button" data-v="2" aria-pressed="false"></button>
+        <button type="button" data-v="5" aria-pressed="false"></button>
+      </div>
+    </header>
+    <p class="livre-tete"><span>Price, pts</span><span>Size</span><span>Total</span></p>
+    <ol class="livre livre-ventes" id="livre-ventes" aria-label="Simulated asks"></ol>
+    <p class="livre-milieu"><b id="livre-prix"></b><span id="livre-ecart"></span></p>
+    <ol class="livre" id="livre-achats" aria-label="Simulated bids"></ol>
+    <header class="pan-tete pan-tete-2">
+      <h2 class="pan-titre">Trades</h2>
+      <span class="simule">Simulated</span>
+    </header>
+    <p class="livre-tete"><span>Price, pts</span><span>Size</span><span>Time</span></p>
+    <ol class="livre echanges" id="echanges" aria-label="Simulated trades"></ol>
+  </section>
+
+  <aside class="cote" aria-label="Order ticket and demo account">
+    <section class="ticket apparait" id="ticket">
+      <div class="estrade">
+        <div class="estrade-pack" id="scene-pack">
+          <img id="scene-repli" src="../packs/pokemon.webp" alt="" decoding="async">
+        </div>
+        <div class="estrade-texte">
+          <p class="etiq">Paper ticket</p>
+          <p class="estrade-code" id="scene-code">PKMN-IDX</p>
+          <div class="segments segments-sens" id="sens" data-v="long" role="group" aria-label="Side">
+            <span class="segments-curseur" aria-hidden="true"></span>
+            <button type="button" data-v="long" aria-pressed="true"><img src="../icons/long.webp" alt="" width="384" height="384" decoding="async">Long</button>
+            <button type="button" data-v="short" aria-pressed="false"><img src="../icons/short.webp" alt="" width="384" height="384" decoding="async">Short</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="segments" id="type" role="group" aria-label="Order type">
+        <span class="segments-curseur" aria-hidden="true"></span>
+        <button type="button" data-v="marche" aria-pressed="true">Market</button>
+        <button type="button" data-v="limite" aria-pressed="false">Limit</button>
+        <button type="button" data-v="stop" aria-pressed="false">Stop</button>
+      </div>
+
+      <div class="saisies" id="saisies">
+        <div class="champ" id="champ-prix" hidden>
+          <label class="etiq" for="prix" id="prix-nom">Limit, pts</label>
+          <div class="saisie"><input id="prix" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" placeholder="0.00" aria-describedby="erreur"></div>
+        </div>
+        <div class="champ" id="champ-marge">
+          <label class="etiq" for="marge" id="marge-nom">Margin, credits</label>
+          <div class="saisie"><img src="../icons/marge.webp" alt="" width="384" height="384" decoding="async"><input id="marge" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" placeholder="0.00" aria-describedby="erreur"></div>
+        </div>
+      </div>
+      <div class="parts" role="group" aria-label="Share of what is available">
+        <button class="petit" type="button" data-part="10">10%</button>
+        <button class="petit" type="button" data-part="25">25%</button>
+        <button class="petit" type="button" data-part="50">50%</button>
+        <button class="petit" type="button" data-part="100">Max</button>
+      </div>
+
+      <div class="levier-bloc" id="levier-bloc">
+        <div class="champ-tete"><label class="etiq etiq-icone" for="levier"><img src="../icons/levier.webp" alt="" width="384" height="384" decoding="async">Leverage</label><output id="levier-val" for="levier">5×</output></div>
+        <input id="levier" type="range" min="1" max="10" step="1" value="5">
+        <div class="crans" role="group" aria-label="Leverage presets">
+          <button type="button" data-levier="1">1×</button>
+          <button type="button" data-levier="2">2×</button>
+          <button type="button" data-levier="5">5×</button>
+          <button type="button" data-levier="10">10×</button>
+        </div>
+      </div>
+
+      <div class="options">
+        <label class="option"><button class="bascule" id="opt-reduire" type="button" aria-pressed="false" aria-label="Reduce only"></button>Reduce only</label>
+        <label class="option"><button class="bascule" id="opt-tpsl" type="button" aria-pressed="false" aria-label="Target and stop loss"></button>TP / SL</label>
+      </div>
+      <div class="saisies a-deux" id="tpsl" hidden>
+        <div class="champ" id="champ-tp">
+          <label class="etiq" for="tp">Target, pts</label>
+          <div class="saisie"><input id="tp" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" placeholder="none" aria-describedby="erreur"></div>
+        </div>
+        <div class="champ" id="champ-sl">
+          <label class="etiq" for="sl">Stop loss, pts</label>
+          <div class="saisie"><input id="sl" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" placeholder="none" aria-describedby="erreur"></div>
+        </div>
+      </div>
+      <p class="erreur" id="erreur" role="alert" hidden></p>
+
+      <div class="marge-liq" id="marge-liq">
+        <div class="champ-tete"><span class="etiq">Room before liquidation</span><b id="j-val"></b></div>
+        <div class="jauge" id="j-ticket"><span></span></div>
+      </div>
+
+      <dl class="recap">
+        <div><dt id="r-entree-nom">Entry, est.</dt><dd id="r-entree"></dd></div>
+        <div><dt>Value</dt><dd id="r-taille"></dd></div>
+        <div><dt>Quantity</dt><dd id="r-qte"></dd></div>
+        <div><dt>Liq. price, est.</dt><dd id="r-liq"></dd></div>
+        <div><dt>Available after</dt><dd id="r-apres"></dd></div>
+        <div><dt>Fees</dt><dd class="attente">Not announced yet</dd></div>
+      </dl>
+
+      <button class="puce puce-zest envoi" id="envoi" type="button" disabled>Open long PKMN-IDX</button>
+      <div class="suite">
+        <p class="note" id="ticket-note">Paper order. Nothing is sent on-chain.</p>
+        <p class="accuse" id="accuse" role="status" hidden><img id="accuse-icone" src="../icons/long.webp" alt="" width="384" height="384"><span id="accuse-texte"></span></p>
+      </div>
+    </section>
+
+    <section class="compte apparait" aria-label="Demo account">
+      <div class="compte-tete">
+        <img src="../icons/wallet.webp" alt="" width="384" height="384" decoding="async">
+        <p class="etiq">Demo account</p>
+        <p class="note" id="compte-wallet">Wallet not connected.</p>
+      </div>
+      <dl class="compte-faits">
+        <div><dt>Equity</dt><dd id="c-total"></dd></div>
+        <div><dt>Available</dt><dd id="c-libre"></dd></div>
+        <div><dt>In use</dt><dd id="c-pris"></dd></div>
+        <div><dt>Open PnL</dt><dd id="c-pnl"></dd></div>
+      </dl>
+    </section>
+  </aside>
+
+  <section class="bas apparait" aria-label="Positions, orders, history and account">
+    <div class="onglets-rang">
+      <div class="onglets" id="onglets" role="tablist" aria-label="Account views">
+        <span class="onglets-curseur" aria-hidden="true"></span>
+        <button type="button" role="tab" id="o-positions" aria-controls="p-positions" aria-selected="true">Positions <span class="compteur" id="n-positions">0</span></button>
+        <button type="button" role="tab" id="o-ordres" aria-controls="p-ordres" aria-selected="false" tabindex="-1">Open orders <span class="compteur" id="n-ordres">0</span></button>
+        <button type="button" role="tab" id="o-passes" aria-controls="p-passes" aria-selected="false" tabindex="-1">Order history</button>
+        <button type="button" role="tab" id="o-echanges" aria-controls="p-echanges" aria-selected="false" tabindex="-1">Trade history</button>
+        <button type="button" role="tab" id="o-compte" aria-controls="p-compte" aria-selected="false" tabindex="-1">Account</button>
+      </div>
+      <div class="onglets-gestes">
+        <span class="simule">Paper, this session</span>
+        <button class="petit petit-alerte" id="tout-fermer" type="button" disabled>Close all</button>
+        <button class="petit petit-alerte" id="tout-annuler" type="button" disabled hidden>Cancel all</button>
+      </div>
+    </div>
+
+    <div class="panneau" id="p-positions" role="tabpanel" aria-labelledby="o-positions" tabindex="0">
+      <table class="grille" id="tb-positions" hidden>
+        <thead id="th-positions"><tr><th data-tri="code" data-sens="haut">Position</th><th class="num" data-tri="qte">Size</th><th class="num" data-tri="taille">Value</th><th class="num" data-tri="entree">Entry</th><th class="num">Mark</th><th class="num" data-tri="liq">Liq.</th><th data-tri="reste" data-sens="haut">To liq.</th><th class="num" data-tri="marge">Margin</th><th class="num" data-tri="pnl">PnL</th><th class="num" data-tri="taux">PnL %</th><th class="num">TP / SL</th><th><span class="cache">Actions</span></th></tr></thead>
+        <tbody id="t-positions"></tbody>
+      </table>
+      <div class="vide" id="v-positions">
+        <img src="../icons/pince.webp" alt="" width="384" height="384" decoding="async">
+        <p><b>No open position.</b>Pick a side on the ticket, set a margin, and the claw grabs a paper position.</p>
+      </div>
+    </div>
+
+    <div class="panneau" id="p-ordres" role="tabpanel" aria-labelledby="o-ordres" tabindex="0" hidden>
+      <table class="grille" id="tb-ordres" hidden>
+        <thead><tr><th>Order</th><th>Type</th><th class="num">Trigger, pts</th><th class="num">Value</th><th class="num">Margin held</th><th>Reduce only</th><th>Placed</th><th><span class="cache">Actions</span></th></tr></thead>
+        <tbody id="t-ordres"></tbody>
+      </table>
+      <div class="vide" id="v-ordres">
+        <img src="../icons/sablier.webp" alt="" width="384" height="384" decoding="async">
+        <p><b>No open order.</b>Limit and stop orders wait here, with the target and stop loss of each position.</p>
+      </div>
+    </div>
+
+    <div class="panneau" id="p-passes" role="tabpanel" aria-labelledby="o-passes" tabindex="0" hidden>
+      <table class="grille" id="tb-passes" hidden>
+        <thead><tr><th>Time</th><th>Order</th><th>Type</th><th class="num">Price, pts</th><th class="num">Value</th><th>Status</th></tr></thead>
+        <tbody id="t-passes"></tbody>
+      </table>
+      <div class="vide" id="v-passes">
+        <img src="../icons/livre.webp" alt="" width="384" height="384" decoding="async">
+        <p><b>No order yet.</b>Every paper order of this session is kept here, filled, cancelled or rejected.</p>
+      </div>
+    </div>
+
+    <div class="panneau" id="p-echanges" role="tabpanel" aria-labelledby="o-echanges" tabindex="0" hidden>
+      <table class="grille" id="tb-echanges" hidden>
+        <thead><tr><th>Time</th><th>Fill</th><th>Through</th><th class="num">Price, pts</th><th class="num">Size</th><th class="num">Value</th><th class="num">Realized PnL</th></tr></thead>
+        <tbody id="t-echanges"></tbody>
+      </table>
+      <div class="vide" id="v-echanges">
+        <img src="../icons/machine.webp" alt="" width="384" height="384" decoding="async">
+        <p><b>Nothing yet.</b>Opens, closes and liquidations of this session are listed here.</p>
+      </div>
+    </div>
+
+    <div class="panneau compte-vue" id="p-compte" role="tabpanel" aria-labelledby="o-compte" tabindex="0" hidden>
+      <dl class="bilan">
+        <div><dt>Equity</dt><dd id="b-total"></dd></div>
+        <div><dt>Available</dt><dd id="b-libre"></dd></div>
+        <div><dt>Margin used</dt><dd id="b-pris"></dd></div>
+        <div><dt>Unrealized PnL</dt><dd id="b-latent"></dd></div>
+        <div><dt>Realized PnL, session</dt><dd id="b-realise"></dd></div>
+        <div><dt>Paper volume, session</dt><dd id="b-volume"></dd></div>
+        <div><dt>Fills, session</dt><dd id="b-nombre"></dd></div>
+        <div><dt>Started with</dt><dd id="b-depart"></dd></div>
+      </dl>
+      <figure class="equite">
+        <figcaption class="etiq">Equity, this session<span class="simule">Demo credits</span></figcaption>
+        <canvas id="toile-equite" role="img" aria-label="Equity of the demo account during this session"></canvas>
+      </figure>
+    </div>
+  </section>
+
+  <p class="mentions" id="mentions">Pokémon, One Piece and Yu-Gi-Oh! are trademarks of their owners. Gachiz is an independent project and is not affiliated with them.</p>
+
+</main>
+
+<footer class="etat-barre" aria-label="Status">
+  <span class="etat-demo"><span class="etat-point" aria-hidden="true"></span>Demo</span>
+  <span>Local time <b id="etat-heure"></b></span>
+  <span class="etat-sim">Simulated index · 1 tick per second</span>
+  <span>Wallet <b id="etat-wallet">not connected</b></span>
+  <span class="etat-compte">Equity <b id="etat-total"></b></span>
+  <span class="etat-compte">Available <b id="etat-libre"></b></span>
+  <span class="etat-fin">
+    <span class="etat-touches" aria-label="Keyboard shortcuts"><span><kbd>L</kbd>Long</span><span><kbd>S</kbd>Short</span><span><kbd>M</kbd>Order type</span><span><kbd>1</kbd><kbd>4</kbd>Index</span><span><kbd>F</kbd>Expand chart</span></span>
+    <button class="petit" id="reglages-bouton" type="button" aria-haspopup="true" aria-expanded="false">Settings</button>
+  </span>
+</footer>
+<div class="reglages" id="reglages" role="dialog" aria-label="Demo settings" hidden>
+  <p class="etiq">Demo settings</p>
+  <div class="reglages-rang"><span>Animations</span><button class="bascule" type="button" data-reglage="animations" aria-pressed="true" aria-label="Animations"></button></div>
+  <div class="reglages-rang"><span>Density</span><span class="deux-touches"><button class="petit" type="button" data-densite="compact">Compact</button><button class="petit" type="button" data-densite="aere">Roomy</button></span></div>
+  <button class="petit" id="remise" type="button">Reset demo account</button>
+  <p class="note">The reset clears paper positions, orders and history, and gives back 10,000 demo credits.</p>
+</div>
+
+<div class="alertes" id="alertes" role="region" aria-label="Notifications" aria-live="polite"></div>
+<script src="../commun.js" defer></script>
+<script src="indice.js" defer></script>
+<script src="chiffres.js" defer></script>
+<script src="terminal.js" defer></script>
+<script src="trade.js" defer></script>
+</body>
+</html>

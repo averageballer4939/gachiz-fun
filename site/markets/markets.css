@@ -1,0 +1,155 @@
+/* Gachiz : la page Markets. L'échelle et les pièces du terminal viennent de ../trade/terminal.css ; les jetons, la
+   barre et les pastilles de ../styles.css. Couleurs : seulement les jetons de ../styles.css. */
+body.page-marches { padding-bottom: var(--etat-h); }
+.marches-page { display: grid; gap: 12px; max-width: 1400px; margin: 0 auto; padding: 14px 16px 22px; }
+.cadre-t { min-width: 0; overflow: hidden; border: 1px solid var(--div-1); border-radius: 10px; }
+
+/* ---------- Le titre de la page, sur une ligne ---------- */
+.titre-rang { display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 10px 16px; padding: 2px 2px 0; }
+.titre-rang h1 { font-size: 24px; line-height: 1.1; letter-spacing: -.03em; }
+.sous-titre { margin-top: 4px; font-size: 13px; color: var(--text-2); }
+.titre-gestes { display: flex; align-items: center; gap: 10px; padding-bottom: 4px; }
+.titre-gestes .puce { height: 34px; padding: 0 14px; font-size: 11px; }
+
+/* ---------- Le tableau des marchés ---------- */
+.pan-tete .recherche { width: 160px; margin-left: auto; }
+.defile { overflow-x: auto; scrollbar-width: thin; scrollbar-color: var(--div-2) transparent; }
+.tableau td { height: 32px; }
+.aere .tableau td { height: 36px; }
+.tableau tbody tr:last-child td { border-bottom: 0; }
+.tableau .col-ep { width: 30px; padding-right: 0; }
+.tableau .qui i { margin-left: 2px; }
+.tableau .qui img.vignette { height: 28px; }
+.tableau .fort { font-weight: 600; font-size: 13px; }
+.cellule-courbe canvas { width: 120px; height: 20px; }
+.tableau td.act { white-space: nowrap; }
+.tableau td.act .petit { min-width: 52px; }
+
+/* ---------- Les quatre familles : une fiche compacte chacune, quatre de front ---------- */
+.familles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.famille { display: grid; align-content: start; gap: 8px; padding: 10px; transition: border-color 200ms var(--courbe), background-color 200ms var(--courbe); }
+.famille:hover { border-color: var(--div-3); background: var(--paper); }
+.famille-pack {
+  position: relative; height: 168px; overflow: hidden; border: 1px solid var(--div-1); border-radius: 8px;
+  background: radial-gradient(80% 60% at 50% 40%, var(--zest-12), transparent 72%), var(--paper);
+}
+.famille-pack img { position: absolute; inset: 10px; width: calc(100% - 20px); height: calc(100% - 20px); object-fit: contain; transform: rotate(-5deg); transition: transform 480ms var(--retour); }
+.famille:hover .famille-pack img { transform: rotate(3deg) translateY(-3px); }
+.famille-pack.gl img { visibility: hidden; }
+.famille-tete { display: grid; gap: 1px; }
+.famille h2 { max-width: none; margin-top: 1px; font-size: 15px; line-height: 1.15; letter-spacing: -.02em; }
+.famille-suit { min-height: 34px; font-size: 12px; line-height: 1.4; color: var(--text-2); }
+.famille-valeur { display: flex; align-items: baseline; gap: 8px; }
+.grand { font: 600 20px/1 var(--texte); letter-spacing: -.02em; color: var(--text-1); }
+.moyen { font: 600 13px/1 var(--texte); color: var(--text-2); }
+.moyen.hausse { color: var(--zest); }
+.moyen.baisse { color: var(--down); }
+.famille-valeur .etiq { margin-left: auto; }
+.famille-courbe { width: 100%; height: 40px; }
+.famille-faits { display: grid; grid-template-columns: auto auto minmax(0, 1fr); gap: 2px 14px; margin: 0; padding-top: 8px; border-top: 1px solid var(--div-1); }
+.famille-faits dt, .non-annonce dt { font: 600 10px/1.2 var(--texte); letter-spacing: .07em; text-transform: uppercase; color: var(--text-3); white-space: nowrap; }
+.famille-faits dd { margin: 2px 0 0; font-weight: 600; font-size: 12px; color: var(--text-1); white-space: nowrap; }
+.famille-faits dd.attente { font-weight: 500; color: var(--text-3); }
+.famille-gestes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; padding-bottom: 2px; }
+.geste { height: 30px; }
+.geste img { width: 22px; height: 22px; transition: transform 220ms var(--retour); }
+.geste:hover img { transform: translateY(-1px) scale(1.1); }
+
+/* ---------- Ce qu'est un indice : trois points, un schéma au trait ; ce qui n'est pas annoncé ---------- */
+.deux-colonnes { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); align-items: start; gap: 12px; }
+.explication-grille { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); align-items: center; gap: 16px; padding: 12px; }
+.points { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
+.points li { display: grid; grid-template-columns: 28px minmax(0, 1fr); align-items: start; gap: 10px; }
+.points img { width: 28px; height: 28px; }
+.points p { line-height: 1.4; color: var(--text-2); }
+.points b { display: block; font-weight: 600; color: var(--text-1); }
+.dessin { margin: 0; padding: 10px 12px; border: 1px solid var(--div-1); border-radius: 8px; background: var(--paper); }
+.dessin svg { display: block; width: 100%; height: auto; }
+/* Trois traits, trois sens : plein pour ce qui est sûr, dégradé pour ce qui bouge, pointillé pour le possible. */
+.dessin .trait { fill: none; stroke-width: 1; stroke-linecap: round; stroke-linejoin: round; }
+.dessin .plein { stroke: var(--div-3); }
+.dessin .bouge { stroke-width: 1.5; }
+.dessin .possible { stroke-dasharray: 3 5; }
+.dessin .long { stroke: var(--zest); }
+.dessin .short { stroke: var(--down); }
+.arret-zest { stop-color: var(--zest); }
+.dessin .noeud circle { fill: var(--paper); }
+.dessin .grand-noeud circle, .dessin .noeud-long circle { stroke: var(--zest); }
+.dessin .grand-noeud .point, .dessin .noeud-long .point { fill: var(--zest); stroke: none; }
+.dessin .noeud-short circle { stroke: var(--down); }
+.dessin .noeud-short .point { fill: var(--down); stroke: none; }
+.mot { font: 600 11px var(--texte); letter-spacing: .08em; text-transform: uppercase; fill: var(--text-3); }
+.mot-long { fill: var(--zest); }
+.mot-short { fill: var(--down); }
+/* Les traits pleins et le trait de l'indice se tracent quand le schéma entre dans l'écran. */
+.js .dessin .plein, .js .dessin .bouge { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 900ms var(--pli); }
+.js .dessin.vu .plein, .js .dessin.vu .bouge { stroke-dashoffset: 0; }
+.js .dessin .t2 { transition-delay: 120ms; }
+.js .dessin .t3 { transition-delay: 240ms; }
+.js .dessin .t4 { transition-delay: 360ms; }
+.js .dessin .t5 { transition-delay: 480ms; }
+.js .dessin .t6 { transition-delay: 760ms; }
+.js .dessin .possible, .js .dessin .noeud-long, .js .dessin .noeud-short, .js .dessin .mot-long, .js .dessin .mot-short { opacity: 0; transition: opacity 420ms var(--courbe) 1500ms; }
+.js .dessin.vu .possible, .js .dessin.vu .noeud-long, .js .dessin.vu .noeud-short, .js .dessin.vu .mot-long, .js .dessin.vu .mot-short { opacity: 1; }
+.sans-anim .dessin .plein, .sans-anim .dessin .bouge { stroke-dasharray: none; stroke-dashoffset: 0; }
+.cles { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--div-1); font-size: 11px; color: var(--text-3); }
+.cles span { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+.cle { display: inline-block; width: 22px; height: 0; border-top: 1px solid var(--div-3); }
+.cle-bouge { height: 1px; border: 0; background: linear-gradient(90deg, transparent, var(--zest)); }
+.cle-possible { border-top-style: dashed; }
+.pan-icone { width: 24px; height: 24px; margin-left: auto; }
+/* Ce qui n'est pas annoncé : des cases en pointillé, sans valeur. */
+.non-annonce { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 0; }
+.non-annonce > div { padding: 9px var(--bord); border-bottom: 1px dashed var(--div-2); }
+.non-annonce > div:nth-child(odd) { border-right: 1px dashed var(--div-2); }
+.non-annonce dd { margin: 3px 0 0; font-size: 12px; color: var(--text-3); }
+.suite-doc { display: grid; grid-template-columns: 32px minmax(0, 1fr) auto; align-items: center; gap: 10px; padding: 10px var(--bord) 12px; }
+.suite-doc img { width: 32px; height: 32px; }
+.suite-doc p { font-size: 12px; line-height: 1.4; color: var(--text-2); }
+.etat-barre .lien { font-size: 11px; }
+
+/* ---------- Écrans plus étroits ---------- */
+@media (max-width: 1340px) {
+  .tableau th:nth-child(11), .tableau td:nth-child(11), .tableau th:nth-child(8), .tableau td:nth-child(8) { display: none; }
+}
+@media (max-width: 1100px) {
+  .familles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .deux-colonnes { grid-template-columns: minmax(0, 1fr); }
+  .tableau th:nth-child(7), .tableau td:nth-child(7), .tableau th:nth-child(10), .tableau td:nth-child(10) { display: none; }
+  .famille-suit { min-height: 34px; }
+}
+@media (max-width: 900px) {
+  .etat-barre .lien { display: none; }
+}
+@media (max-width: 720px) {
+  .marches-page { padding: 12px 12px 18px; }
+  .explication-grille { grid-template-columns: minmax(0, 1fr); }
+  /* Le tableau devient des fiches : une étiquette au-dessus de chaque valeur. */
+  .tableau, .tableau tbody { display: block; }
+  .tableau thead { display: none; }
+  .tableau tr { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px 12px; padding: 12px var(--bord); border-bottom: 1px solid var(--div-1); }
+  .tableau tbody tr:last-child { border-bottom: 0; }
+  .tableau td, .tableau td.num { display: block; height: auto; padding: 0; border: 0; text-align: left; white-space: normal; }
+  .tableau th:nth-child(n), .tableau td:nth-child(n) { display: block; }
+  .tableau td::before { content: attr(data-l); display: block; margin-bottom: 3px; font: 600 10px/1.2 var(--texte); letter-spacing: .07em; text-transform: uppercase; color: var(--text-3); }
+  .tableau td.col-ep { position: absolute; right: 8px; top: 10px; width: auto; }
+  .tableau td:nth-child(2), .tableau td.act { grid-column: 1 / -1; }
+  .tableau td.col-ep::before, .tableau td:nth-child(2)::before, .tableau td.act::before { content: none; }
+  .tableau td.act { width: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .tableau td.act .petit { height: 30px; margin: 0; }
+  .tableau td:nth-child(8), .tableau td:nth-child(10), .tableau td:nth-child(11) { display: none; }
+}
+@media (max-width: 560px) {
+  .familles { grid-template-columns: minmax(0, 1fr); }
+  .famille { grid-template-columns: 112px minmax(0, 1fr); column-gap: 12px; }
+  .famille-pack { grid-row: 1 / 5; height: auto; min-height: 150px; }
+  .famille-faits, .famille-gestes { grid-column: 1 / -1; }
+  .famille-suit { min-height: 0; }
+  .titre-gestes { width: 100%; justify-content: space-between; }
+  .suite-doc { grid-template-columns: 32px minmax(0, 1fr); }
+  .suite-doc .petit { grid-column: 1 / -1; height: 30px; }
+}
+.mentions { padding: 2px 2px 0; font-size: 11px; line-height: 1.4; color: var(--text-3); }
+
+/* Le jeton dans la barre : seulement quand la place est là. */
+@media (max-width: 1100px) { .page-marches .puce-jeton { display: none; } }

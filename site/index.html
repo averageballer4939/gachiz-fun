@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; base-uri 'none'; form-action 'none'">
+<meta name="theme-color" content="#111210">
+<meta name="description" content="Gachiz: perpetual markets on Pokémon, One Piece, Yu-Gi-Oh! and sports card indexes, on Robinhood Chain. Demo.">
+<title>Gachiz: long the grail, short the hype</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/sora-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/saira-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<svg class="gz-defs" width="0" height="0" aria-hidden="true">
+  <filter id="gz-soude" color-interpolation-filters="sRGB">
+    <feComponentTransfer><feFuncA type="linear" slope="3" intercept="-1"/></feComponentTransfer>
+  </filter>
+</svg>
+
+<div class="gz-load" id="chargement" role="status" aria-label="Loading">
+  <div class="gz-mark" aria-hidden="true">
+    <div class="gz-flou">
+      <i class="v1 t6"></i><i class="v1 t5"></i><i class="v1 t4"></i><i class="v1 t3"></i><i class="v1 t2"></i><i class="v1 t1"></i>
+      <i class="v2 t6"></i><i class="v2 t5"></i><i class="v2 t4"></i><i class="v2 t3"></i><i class="v2 t2"></i><i class="v2 t1"></i>
+      <i class="v3 t6"></i><i class="v3 t5"></i><i class="v3 t4"></i><i class="v3 t3"></i><i class="v3 t2"></i><i class="v3 t1"></i>
+      <i class="v4 t6"></i><i class="v4 t5"></i><i class="v4 t4"></i><i class="v4 t3"></i><i class="v4 t2"></i><i class="v4 t1"></i>
+      <i class="v5 t6"></i><i class="v5 t5"></i><i class="v5 t4"></i><i class="v5 t3"></i><i class="v5 t2"></i><i class="v5 t1"></i>
+    </div>
+    <div class="gz-net">
+      <i class="b1"></i><i class="v1"></i>
+      <i class="b2"></i><i class="v2"></i>
+      <i class="b3"></i><i class="v3"></i>
+      <i class="b4"></i><i class="v4"></i>
+      <i class="b5"></i><i class="v5"></i>
+    </div>
+  </div>
+</div>
+
+<header class="barre">
+  <div class="barre-gauche">
+    <a class="puce puce-logo" href="./" aria-label="Gachiz, home">
+      <svg viewBox="0 0 136.6 107" aria-hidden="true">
+        <polygon points="47.34,0 124.34,0 99.51,43 72.17,43 49.65,82 64.08,107 14.43,107 0,82"/>
+        <polygon points="86.6,68 136.6,68 114.08,107 64.08,107"/>
+      </svg>
+    </a>
+    <nav class="liens" aria-label="Main">
+      <a class="puce" href="markets/">Markets</a>
+      <a class="puce" href="trade/">Trade</a>
+      <a class="puce" href="docs/">Docs</a>
+      <a class="puce" href="#faq">FAQ</a>
+    </nav>
+  </div>
+  <div class="barre-droite">
+    <button class="puce puce-jeton" type="button" data-jeton aria-label="GACHIZ token: copy the contract address"><img src="icons/marge.webp" alt="" width="30" height="30"><span class="jeton-nom">GACHIZ</span><span class="jeton-ca" data-jeton-ca>CA soon</span></button>
+    <a class="puce puce-x" href="https://x.com/gachizfun" rel="noopener" aria-label="Gachiz on X: @gachizfun"><img class="logo-x" src="logos/x.png" alt="" width="14" height="14"><span>@gachizfun</span></a>
+    <div class="wallet">
+      <button class="puce puce-zest" id="wallet-bouton" type="button" aria-haspopup="dialog" aria-expanded="false">Connect</button>
+      <div class="wallet-menu" id="wallet-menu" hidden></div>
+    </div>
+  </div>
+</header>
+
+<section class="tete">
+  <div class="tete-titre">
+    <p class="libelle">Perps for collectibles</p>
+    <h1>Long the grail.<br><span class="gris">Short the hype.</span></h1>
+  </div>
+  <div class="tete-droite">
+    <p class="promesse">Perpetual markets on Pokémon, One Piece, Yu-Gi-Oh! and sports card indexes. On Robinhood Chain.</p>
+  </div>
+</section>
+
+<section class="scene" aria-label="The markets, as packs">
+  <svg class="orbites" viewBox="0 0 1200 360" preserveAspectRatio="none" aria-hidden="true">
+    <ellipse cx="600" cy="180" rx="596" ry="150"/><ellipse cx="600" cy="180" rx="430" ry="96"/>
+  </svg>
+  <div class="ronde attend" id="ronde" role="group" aria-label="Four index packs turning in a ring. Drag to spin.">
+    <div class="pack" data-code="PKMN-IDX" data-nom="Pokémon cards" data-ligne="An index of Pokémon trading-card sales"><img src="packs/pokemon.webp" alt="Gachiz pack for the Pokémon card index" width="560" height="1040" decoding="async"><span class="dos"></span><span class="reflet"></span></div>
+    <div class="pack" data-code="OP-IDX" data-nom="One Piece cards" data-ligne="An index of One Piece trading-card sales"><img src="packs/onepiece.webp" alt="Gachiz pack for the One Piece card index" width="560" height="1040" decoding="async"><span class="dos"></span><span class="reflet"></span></div>
+    <div class="pack" data-code="YGO-IDX" data-nom="Yu-Gi-Oh! cards" data-ligne="An index of Yu-Gi-Oh! trading-card sales"><img src="packs/yugioh.webp" alt="Gachiz pack for the Yu-Gi-Oh! card index" width="560" height="1040" decoding="async"><span class="dos"></span><span class="reflet"></span></div>
+    <div class="pack" data-code="SPORTS-IDX" data-nom="Sports cards" data-ligne="An index of sports trading-card sales"><img src="packs/sports.webp" alt="Gachiz pack for the sports card index" width="560" height="1040" decoding="async"><span class="dos"></span><span class="reflet"></span></div>
+    <div class="pack" aria-hidden="true" data-code="PKMN-IDX" data-nom="Pokémon cards" data-ligne="An index of Pokémon trading-card sales"><img src="packs/pokemon.webp" alt="" width="560" height="1040" decoding="async"><span class="dos"></span><span class="reflet"></span></div>
+    <div class="pack" aria-hidden="true" data-code="OP-IDX" data-nom="One Piece cards" data-ligne="An index of One Piece trading-card sales"><img src="packs/onepiece.webp" alt="" width="560" height="1040" decoding="async"><span class="dos"></span><span class="reflet"></span></div>
+    <div class="pack" aria-hidden="true" data-code="YGO-IDX" data-nom="Yu-Gi-Oh! cards" data-ligne="An index of Yu-Gi-Oh! trading-card sales"><img src="packs/yugioh.webp" alt="" width="560" height="1040" decoding="async"><span class="dos"></span><span class="reflet"></span></div>
+    <div class="pack" aria-hidden="true" data-code="SPORTS-IDX" data-nom="Sports cards" data-ligne="An index of sports trading-card sales"><img src="packs/sports.webp" alt="" width="560" height="1040" decoding="async"><span class="dos"></span><span class="reflet"></span></div>
+  </div>
+  <div class="cartel" id="cartel">
+    <button class="puce puce-ronde" id="ronde-avant" type="button" aria-label="Previous pack"><span class="chevron" aria-hidden="true"></span></button>
+    <div class="cartel-texte" aria-live="polite">
+      <p class="libelle" id="cartel-code">PKMN-IDX</p>
+      <p class="cartel-nom" id="cartel-nom">Pokémon cards</p>
+      <p class="cartel-ligne" id="cartel-ligne">An index of Pokémon trading-card sales</p>
+    </div>
+    <button class="puce puce-ronde" id="ronde-apres" type="button" aria-label="Next pack"><span class="chevron" aria-hidden="true"></span></button>
+  </div>
+  <div class="cartel-gestes">
+    <a class="puce puce-zest ordre" data-sens="long" href="trade/?market=PKMN-IDX&amp;side=long">Long</a>
+    <a class="puce puce-baisse ordre" data-sens="short" href="trade/?market=PKMN-IDX&amp;side=short">Short</a>
+    <p class="etat">Opens the demo: simulated index, paper orders.</p>
+  </div>
+</section>
+
+<main class="cadre">
+  <section class="faits" aria-label="Facts">
+    <div class="fait-chaine"><span class="logo-chaine"><img src="logos/robinhood-chain.svg" alt="Robinhood Chain" width="152" height="20"></span><p class="libelle">Network</p></div>
+    <div><span class="duo"><img src="icons/long.webp" alt="" width="44" height="44" loading="lazy"><img src="icons/short.webp" alt="" width="44" height="44" loading="lazy"></span><p class="fait">Long and short</p><p class="libelle">Sides</p></div>
+    <div><img src="icons/bouclier.webp" alt="" width="56" height="56" loading="lazy"><p class="fait">Read-only connect</p><p class="libelle">Wallet</p></div>
+    <div><img src="icons/sablier.webp" alt="" width="56" height="56" loading="lazy"><p class="fait">Preview</p><p class="libelle">Status</p></div>
+  </section>
+
+  <section class="bloc" id="markets">
+    <p class="libelle apparait">Trade the collection</p>
+    <h2 class="apparait">Pokémon, One Piece, Yu-Gi-Oh! and sports cards, <span class="gris">as perpetual markets.</span></h2>
+
+    <ul class="lignes apparait">
+      <li class="ligne"><span class="medaillon"><img src="packs/mini/pokemon.webp" alt="" width="64" height="64" loading="lazy"></span><span class="nom">Pokémon cards</span><span class="code">PKMN-IDX</span><span class="precision">An index of Pokémon trading-card sales</span><span class="statut">Preview</span></li>
+      <li class="ligne"><span class="medaillon"><img src="packs/mini/onepiece.webp" alt="" width="64" height="64" loading="lazy"></span><span class="nom">One Piece cards</span><span class="code">OP-IDX</span><span class="precision">An index of One Piece trading-card sales</span><span class="statut">Preview</span></li>
+      <li class="ligne"><span class="medaillon"><img src="packs/mini/yugioh.webp" alt="" width="64" height="64" loading="lazy"></span><span class="nom">Yu-Gi-Oh! cards</span><span class="code">YGO-IDX</span><span class="precision">An index of Yu-Gi-Oh! trading-card sales</span><span class="statut">Preview</span></li>
+      <li class="ligne"><span class="medaillon"><img src="packs/mini/sports.webp" alt="" width="64" height="64" loading="lazy"></span><span class="nom">Sports cards</span><span class="code">SPORTS-IDX</span><span class="precision">An index of sports trading-card sales</span><span class="statut">Preview</span></li>
+    </ul>
+
+    <div class="vitrine apparait" id="vitrine">
+      <div class="vitrine-scene">
+        <a class="ecran ecran-ordi" href="trade/" aria-label="Open the trading demo">
+          <img src="apercus/app-ordi.webp" alt="The Gachiz trading screen: four index markets, a candle chart, the order ticket and an open long position. Demo data." width="1440" height="900" loading="lazy">
+        </a>
+        <div class="ecran ecran-tel" aria-hidden="true"><img src="apercus/app-tel.webp" alt="" width="390" height="844" loading="lazy"></div>
+      </div>
+      <div class="vitrine-pied">
+        <p class="libelle">The trading screen, running on demo data</p>
+        <a class="puce puce-zest" href="trade/">Open the demo</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="bloc" id="how">
+    <p class="libelle apparait">From wallet to position</p>
+    <h2 class="apparait">Four steps, <span class="gris">one position.</span></h2>
+    <ol class="etapes">
+      <li class="etape apparait">
+        <svg class="schema" width="220" height="120" viewBox="0 0 220 120" aria-hidden="true">
+          <path class="trait" d="M30 60H112"/><circle class="orbite" cx="158" cy="60" r="46"/>
+          <g class="noeud"><circle cx="30" cy="60" r="5"/><circle class="point" cx="30" cy="60" r="1.6"/></g>
+          <g class="noeud actif"><circle cx="112" cy="60" r="5"/><circle class="point" cx="112" cy="60" r="1.6"/></g>
+          <g class="noeud"><circle cx="181" cy="20.2" r="5"/><circle class="point" cx="181" cy="20.2" r="1.6"/></g>
+        </svg>
+        <p class="numero"><img src="icons/wallet.webp" alt="" width="64" height="64" loading="lazy">01</p><p class="etape-texte">Connect a wallet on Robinhood Chain.</p>
+      </li>
+      <li class="etape apparait">
+        <svg class="schema" width="220" height="120" viewBox="0 0 220 120" aria-hidden="true">
+          <path class="trait" d="M36 18L72.4 81M84 18L96.1 39M132 18L119.9 39M180 18L143.6 81"/><circle class="orbite" cx="108" cy="82" r="24"/>
+          <g class="noeud"><circle cx="36" cy="18" r="5"/><circle class="point" cx="36" cy="18" r="1.6"/></g>
+          <g class="noeud"><circle cx="84" cy="18" r="5"/><circle class="point" cx="84" cy="18" r="1.6"/></g>
+          <g class="noeud"><circle cx="132" cy="18" r="5"/><circle class="point" cx="132" cy="18" r="1.6"/></g>
+          <g class="noeud"><circle cx="180" cy="18" r="5"/><circle class="point" cx="180" cy="18" r="1.6"/></g>
+          <g class="noeud actif"><circle cx="108" cy="82" r="7"/><circle class="point" cx="108" cy="82" r="2.2"/></g>
+        </svg>
+        <p class="numero"><img src="icons/indice.webp" alt="" width="64" height="64" loading="lazy">02</p><p class="etape-texte">Pick an index of collectibles.</p>
+      </li>
+      <li class="etape apparait">
+        <svg class="schema" width="220" height="120" viewBox="0 0 220 120" aria-hidden="true">
+          <path class="trait" d="M24 60H86"/><path class="trait allume" d="M86 60L112 15H196"/><path class="trait baisse" d="M86 60L112 105H196"/>
+          <g class="noeud"><circle cx="24" cy="60" r="5"/><circle class="point" cx="24" cy="60" r="1.6"/></g>
+          <g class="noeud actif"><circle cx="86" cy="60" r="5"/><circle class="point" cx="86" cy="60" r="1.6"/></g>
+        </svg>
+        <p class="numero"><img src="icons/levier.webp" alt="" width="64" height="64" loading="lazy">03</p><p class="etape-texte">Go long or short, with leverage.</p>
+      </li>
+      <li class="etape apparait">
+        <svg class="schema" width="220" height="120" viewBox="0 0 220 120" aria-hidden="true">
+          <path class="trait" d="M28 92L64 29.6H156L192 92"/><path class="trait pointille" d="M28 92H192"/>
+          <g class="noeud actif"><circle cx="28" cy="92" r="5"/><circle class="point" cx="28" cy="92" r="1.6"/></g>
+          <g class="noeud"><circle cx="64" cy="29.6" r="5"/><circle class="point" cx="64" cy="29.6" r="1.6"/></g>
+          <g class="noeud"><circle cx="156" cy="29.6" r="5"/><circle class="point" cx="156" cy="29.6" r="1.6"/></g>
+          <g class="noeud actif"><circle cx="192" cy="92" r="5"/><circle class="point" cx="192" cy="92" r="1.6"/></g>
+        </svg>
+        <p class="numero"><img src="icons/pince.webp" alt="" width="64" height="64" loading="lazy">04</p><p class="etape-texte">Close the position whenever you want.</p>
+      </li>
+    </ol>
+  </section>
+
+  <section class="bloc" id="faq">
+    <p class="libelle apparait">FAQ</p>
+    <div class="titre-icone apparait"><img src="icons/question.webp" alt="" width="72" height="72" loading="lazy"><h2>Straight answers.</h2></div>
+    <div class="faq-grille">
+    <div class="questions apparait">
+      <details><summary>What is Gachiz?</summary><p>A market for collectibles. Instead of pulling a card and hoping, you take a long or short position on an index of Pokémon, One Piece, Yu-Gi-Oh! or sports card sales.</p></details>
+      <details><summary>Is Gachiz affiliated with these card games?</summary><p>No. Gachiz is an independent project. Pokémon, One Piece and Yu-Gi-Oh! are trademarks of their owners: their names only say which cards an index follows.</p></details>
+      <details><summary>Is trading live?</summary><p>No. This site is a preview. No order is sent and no funds are taken. Connecting a wallet only reads your address.</p></details>
+      <details><summary>Which chain is it on?</summary><p>Robinhood Chain, an EVM network (chain id 4663).</p></details>
+      <details><summary>Is there a token?</summary><p>A GACHIZ token is planned. It has no contract address yet: any address you see elsewhere is not ours. Once it exists, it is shown in the top bar and the footer, with a button to copy it.</p></details>
+    </div>
+    <figure class="apercu apercu-cote apparait">
+      <figcaption class="libelle">What Connect reads</figcaption>
+      <svg class="schema" width="280" height="190" viewBox="0 0 280 190" role="img" aria-label="Schematic: connecting a wallet reads its address only. Funds are not touched.">
+        <circle class="orbite" cx="58" cy="95" r="34"/>
+        <path class="trait allume" d="M92 95H150L176 50H232"/><path class="trait pointille" d="M150 95L176 140H232"/>
+        <g class="noeud actif"><circle cx="58" cy="95" r="7"/><circle class="point" cx="58" cy="95" r="2.2"/></g>
+        <g class="noeud actif"><circle cx="232" cy="50" r="5"/><circle class="point" cx="232" cy="50" r="1.6"/></g>
+        <g class="noeud"><circle cx="232" cy="140" r="5"/><circle class="point" cx="232" cy="140" r="1.6"/></g>
+        <text class="ap-texte" x="58" y="150" text-anchor="middle">Wallet</text>
+        <text class="ap-texte ap-texte-zest" x="240" y="34" text-anchor="end">Address</text>
+        <text class="ap-texte" x="240" y="166" text-anchor="end">Funds: untouched</text>
+      </svg>
+    </figure>
+    </div>
+    <a class="carte-doc apparait" href="docs/">
+      <img src="icons/livre.webp" alt="" width="64" height="64" loading="lazy">
+      <span><strong>The rest is in the docs</strong><span>Indexes, perps basics, the demo and what Connect reads.</span></span>
+      <span class="chevron" aria-hidden="true"></span>
+    </a>
+  </section>
+
+</main>
+
+<footer class="pied">
+  <div class="pied-soudure" aria-hidden="true"></div>
+  <div class="tirage" id="tirage">
+    <button class="tirage-machine" id="tirage-bouton" type="button" aria-label="Pull a capsule from the machine">
+      <img src="icons/machine.webp" alt="" width="230" height="230" loading="lazy">
+    </button>
+    <p class="tirage-etat" id="tirage-etat" aria-live="polite">Pull a capsule. Each one holds an index.</p>
+    <ol class="plateau" aria-label="Indexes pulled">
+      <li class="socle" data-code="PKMN-IDX"><img src="icons/socle.webp" alt="" width="84" height="84" loading="lazy"><a class="trouve" href="trade/?market=PKMN-IDX" aria-label="Pokémon cards, open the demo" hidden><img src="packs/mini/pokemon.webp" alt="" width="72" height="72" loading="lazy"></a><span class="libelle">PKMN-IDX</span></li>
+      <li class="socle" data-code="OP-IDX"><img src="icons/socle.webp" alt="" width="84" height="84" loading="lazy"><a class="trouve" href="trade/?market=OP-IDX" aria-label="One Piece cards, open the demo" hidden><img src="packs/mini/onepiece.webp" alt="" width="72" height="72" loading="lazy"></a><span class="libelle">OP-IDX</span></li>
+      <li class="socle" data-code="YGO-IDX"><img src="icons/socle.webp" alt="" width="84" height="84" loading="lazy"><a class="trouve" href="trade/?market=YGO-IDX" aria-label="Yu-Gi-Oh! cards, open the demo" hidden><img src="packs/mini/yugioh.webp" alt="" width="72" height="72" loading="lazy"></a><span class="libelle">YGO-IDX</span></li>
+      <li class="socle" data-code="SPORTS-IDX"><img src="icons/socle.webp" alt="" width="84" height="84" loading="lazy"><a class="trouve" href="trade/?market=SPORTS-IDX" aria-label="Sports cards, open the demo" hidden><img src="packs/mini/sports.webp" alt="" width="72" height="72" loading="lazy"></a><span class="libelle">SPORTS-IDX</span></li>
+    </ol>
+  </div>
+  <div class="pied-corps">
+    <div class="pied-marque">
+      <a class="puce puce-logo" href="./" aria-label="Gachiz, back to top">
+        <svg viewBox="0 0 136.6 107" aria-hidden="true">
+          <polygon points="47.34,0 124.34,0 99.51,43 72.17,43 49.65,82 64.08,107 14.43,107 0,82"/>
+          <polygon points="86.6,68 136.6,68 114.08,107 64.08,107"/>
+        </svg>
+      </a>
+      <p class="pied-phrase">Perps for collectibles.<br><span class="gris">On Robinhood Chain.</span></p>
+    </div>
+    <nav class="pied-liens" aria-label="Footer">
+      <div><p class="libelle">Product</p><a href="markets/">Markets</a><a href="trade/">Trade demo</a><a href="docs/">Docs</a></div>
+      <div><p class="libelle">Network</p><span class="logo-chaine"><img src="logos/robinhood-chain.svg" alt="Robinhood Chain" width="152" height="20" loading="lazy"></span></div>
+      <div><p class="libelle">Follow</p><a href="https://x.com/gachizfun" rel="noopener" aria-label="Gachiz on X: @gachizfun"><img class="logo-x" src="logos/x.png" alt="" width="15" height="15">@gachizfun</a></div>
+      <div>
+        <p class="libelle">Status</p>
+        <p class="pied-etat"><span class="voyant"></span>Preview. No order is sent.</p>
+        <button class="puce puce-son" id="son-bouton" type="button" aria-pressed="true"><img src="icons/son.webp" alt="" width="32" height="32" loading="lazy"><span>Sound on</span></button>
+      </div>
+    </nav>
+  </div>
+  <div class="pied-jeton">
+    <img src="icons/marge.webp" alt="" width="64" height="64" loading="lazy">
+    <div><strong>GACHIZ token</strong><p class="jeton-adresse" data-jeton-texte>No contract address yet. Any address you see elsewhere is not ours.</p></div>
+    <button class="puce" type="button" data-jeton>Copy CA</button>
+  </div>
+  <div class="pied-bas">
+    <p>© 2026 Gachiz</p>
+    <p>An independent project, not affiliated with Robinhood or with the owners of Pokémon, One Piece and Yu-Gi-Oh!, which are trademarks of their owners.</p>
+  </div>
+</footer>
+
+<script src="commun.js" defer></script>
+<script src="app.js" defer></script>
+</body>
+</html>

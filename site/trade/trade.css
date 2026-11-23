@@ -1,0 +1,311 @@
+/* Gachiz : l'app de trading, en démo. L'échelle et les pièces du terminal viennent de terminal.css ; les jetons, la
+   barre, les pastilles, les alertes et le pop-up de ../styles.css. Couleurs : seulement les jetons de ../styles.css. */
+:root { --barre-h: 69px; --bandeau-h: 44px; --cote-l: 288px; }
+body.app { overflow: hidden; }
+/* Les alertes se posent sur la fiche du marché, à gauche : ni le ticket, ni le graphique, ni les tableaux ne sont couverts. */
+.app .alertes { left: 8px; right: auto; bottom: calc(var(--etat-h) + 256px); width: 216px; }
+
+/* ---------- La grille du terminal : marchés, en-tête, graphique, carnet, ticket, bas ---------- */
+.terminal {
+  position: relative; display: grid; grid-template-columns: 232px minmax(0, 1fr) 224px var(--cote-l); grid-template-rows: 44px minmax(0, 1fr) 248px;
+  height: calc(100dvh - var(--barre-h) - var(--bandeau-h) - var(--etat-h)); min-height: 520px;
+}
+.aere .terminal { grid-template-rows: 48px minmax(0, 1fr) 264px; }
+.marches { grid-column: 1; grid-row: 1 / 3; display: flex; flex-direction: column; min-height: 0; overflow: hidden; border-right: 1px solid var(--div-1); }
+.entete { grid-column: 2 / 4; grid-row: 1; }
+.centre { grid-column: 2; grid-row: 2; display: flex; flex-direction: column; min-width: 0; min-height: 0; }
+.carnet { grid-column: 3; grid-row: 2; display: flex; flex-direction: column; min-width: 0; min-height: 0; overflow: hidden; border-left: 1px solid var(--div-1); }
+.bas { grid-column: 1 / 4; grid-row: 3; display: flex; flex-direction: column; min-width: 0; min-height: 0; border-top: 1px solid var(--div-1); }
+.cote { grid-column: 4; grid-row: 1 / 4; display: flex; flex-direction: column; min-height: 0; padding-bottom: 64px; overflow-y: auto; border-left: 1px solid var(--div-1); scrollbar-width: thin; scrollbar-color: var(--div-2) transparent; }
+
+/* ---------- En-tête de panneau ---------- */
+.pan-tete .recherche { width: 108px; margin-left: auto; }
+.pan-tete .segments { margin-left: auto; }
+.pan-tete .segments button { padding: 0 6px; }
+.pan-tete-2 { border-top: 1px solid var(--div-1); }
+
+/* ---------- Marchés : un vrai tableau, deux lignes par indice ---------- */
+.liste-boite { position: relative; flex: none; }
+.liste { position: relative; z-index: 1; table-layout: fixed; }
+.liste .col-ep { width: 22px; padding-right: 0; }
+.liste th:nth-child(3) { width: 58px; }
+.liste th:nth-child(4) { width: 52px; }
+.liste th, .liste td { padding: 0 5px; }
+.liste .qui { gap: 6px; }
+.liste td { border-bottom: 0; }
+.paire { cursor: pointer; outline-offset: -2px; transition: background-color 120ms var(--courbe); }
+.paire:hover { background: var(--zest-4); }
+.grille .paire tr:hover { background: none; }
+.ligne-marche td { height: 26px; }
+.ligne-detail td { height: 21px; padding-bottom: 3px; border-bottom: 1px solid var(--div-1); font-size: 11px; color: var(--text-3); }
+.detail { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.detail canvas { width: 64px; height: 16px; }
+.detail b { font-weight: 500; color: var(--text-2); }
+.marches-curseur { position: absolute; left: 0; top: 0; width: 100%; height: 0; background: var(--zest-8); box-shadow: inset 1px 0 0 var(--zest); pointer-events: none; }
+.pret .marches-curseur { transition: transform 240ms var(--courbe), height 240ms var(--courbe), width 240ms var(--courbe); }
+/* La fiche du marché : ce que suit la famille, et ce qui n'est pas annoncé. */
+.fiche { display: grid; gap: 8px; padding: 10px var(--bord); overflow: hidden; }
+.fiche-tete { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 10px; }
+.fiche-tete img { width: auto; height: 40px; }
+.fiche-nom { margin-top: 1px; font: 600 14px/1.2 var(--titre); letter-spacing: -.02em; color: var(--text-1); }
+.fiche-texte { font-size: 12px; line-height: 1.4; color: var(--text-2); }
+.fiche-faits { display: grid; gap: 3px; margin: 0; padding-top: 8px; border-top: 1px solid var(--div-1); }
+.fiche-faits > div { display: flex; justify-content: space-between; gap: 10px; font-size: 11.5px; line-height: 1.4; }
+.fiche-faits dt { color: var(--text-3); white-space: nowrap; }
+.fiche-faits dd { margin: 0; color: var(--text-3); text-align: right; white-space: nowrap; }
+.fiche-faits .fait-ici { color: var(--warn); }
+.fiche .lien { justify-self: start; font-size: 12px; }
+
+/* ---------- En-tête du marché : une ligne de mesures ---------- */
+.entete { display: flex; align-items: center; gap: 18px; min-width: 0; padding: 0 var(--bord); overflow: hidden; border-bottom: 1px solid var(--div-1); container-type: inline-size; }
+.entete-nom { flex: none; display: flex; align-items: center; gap: 8px; }
+.entete-nom img { width: auto; height: 32px; }
+.entete h1 { font-size: 15px; line-height: 1.1; letter-spacing: -.02em; white-space: nowrap; }
+.entete-nom p { font-size: 11px; line-height: 1.2; color: var(--text-3); white-space: nowrap; }
+.mesures { display: flex; align-items: center; gap: 16px; min-width: 0; margin: 0; }
+.mesures > div { flex: none; }
+.mesures dt { font: 600 9.5px/1.2 var(--texte); letter-spacing: .07em; text-transform: uppercase; color: var(--text-3); white-space: nowrap; }
+.mesures dd { margin: 2px 0 0; font-weight: 600; font-size: 12.5px; line-height: 1.15; color: var(--text-1); white-space: nowrap; }
+.mesures dd.hausse { color: var(--zest); }
+.mesures dd.baisse { color: var(--down); }
+.mesures dd.attente { font-weight: 500; color: var(--text-3); }
+.mesure-grande dd { font-size: 17px; min-width: 6.4ch; }
+@container (max-width: 1010px) { .mesures > div:nth-child(9) { display: none; } }
+@container (max-width: 800px) { .mesures > div:nth-child(6) { display: none; } }
+@container (max-width: 720px) { .mesures > div:nth-child(5) { display: none; } }
+@container (max-width: 650px) { .mesures > div:nth-child(8) { display: none; } }
+@container (max-width: 560px) { .mesures > div:nth-child(7), .entete-nom p { display: none; } }
+@container (max-width: 470px) { .mesures > div:nth-child(4) { display: none; } }
+
+/* ---------- Graphique : la barre d'outils, la toile ---------- */
+.outils { flex: none; display: flex; align-items: center; gap: 10px; height: var(--pan); padding: 0 var(--bord); overflow: hidden; border-bottom: 1px solid var(--div-1); }
+.outils .option { font-size: 11px; }
+.outils-fin { margin-left: auto; }
+.graphe { position: relative; flex: 1; min-height: 160px; }
+.graphe canvas { position: absolute; inset: 0; width: 100%; height: 100%; cursor: crosshair; touch-action: pan-y; }
+.legende { position: absolute; left: var(--bord); top: 7px; z-index: 1; display: flex; flex-wrap: wrap; gap: 0 10px; max-width: calc(100% - 80px); font-size: 11px; line-height: 1.3; color: var(--text-3); pointer-events: none; }
+.legende b { font-weight: 600; color: var(--text-1); }
+/* Le graphique en grand : il prend la place du terminal, entre la barre et la barre d'état. */
+.centre.plein { position: fixed; left: 0; right: 0; top: calc(var(--barre-h) + var(--bandeau-h)); bottom: var(--etat-h); z-index: 35; background: var(--bg); }
+
+/* ---------- Carnet et échanges, simulés : le carnet dessus, les échanges dessous ---------- */
+.livre { flex: none; margin: 0; padding: 0; list-style: none; }
+.livre-ventes { display: flex; flex-direction: column-reverse; }
+.livre-tete, .niveau { display: grid; grid-template-columns: minmax(0, 1fr) 52px 58px; align-items: center; gap: 6px; padding: 0 var(--bord); }
+.livre-tete { flex: none; height: 20px; font: 600 9.5px/1 var(--texte); letter-spacing: .07em; text-transform: uppercase; color: var(--text-3); }
+.livre-tete span:nth-child(n + 2), .niveau span:nth-child(n + 3), .echange span:nth-child(n + 2) { text-align: right; }
+.niveau { position: relative; height: 20px; font-size: 11.5px; line-height: 1; color: var(--text-2); cursor: pointer; transition: background-color 120ms var(--courbe), color 120ms var(--courbe); }
+.niveau > span { position: relative; }
+.niveau-barre { position: absolute !important; inset: 1px 0; transform: scaleX(0); transform-origin: right; pointer-events: none; transition: transform 320ms var(--courbe); }
+.niveau-vente .niveau-barre { background: var(--down-25); }
+.niveau-achat .niveau-barre { background: var(--zest-25); }
+.niveau-vente .niveau-prix { color: var(--down); }
+.niveau-achat .niveau-prix { color: var(--zest); }
+.niveau:hover { background: var(--muted); color: var(--text-1); }
+.livre-milieu { flex: none; display: flex; align-items: center; justify-content: space-between; gap: 8px; height: 26px; padding: 0 var(--bord); border-top: 1px solid var(--div-1); border-bottom: 1px solid var(--div-1); }
+.livre-milieu b { font-weight: 600; font-size: 14px; color: var(--text-1); }
+.livre-milieu b.hausse { color: var(--zest); }
+.livre-milieu b.baisse { color: var(--down); }
+.livre-milieu span { font-size: 10.5px; color: var(--text-3); }
+.echanges { flex: 1; min-height: 0; overflow: hidden; }
+.echange { cursor: default; }
+.echange.neuf { animation: gz-echange 420ms var(--courbe) both; }
+@keyframes gz-echange { from { opacity: 0; filter: blur(2px); transform: translateY(-5px); } }
+
+/* ---------- Ticket ---------- */
+.ticket { display: grid; gap: 8px; padding: var(--bord); border-bottom: 1px solid var(--div-1); }
+/* L'estrade : le pack du marché en 3D (ou son image), le code, le sens. */
+.estrade { display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 10px; }
+.estrade-pack {
+  position: relative; height: 96px; overflow: hidden; border: 1px solid var(--div-1); border-radius: 10px;
+  background: radial-gradient(80% 70% at 50% 42%, var(--zest-12), transparent 72%), var(--paper); perspective: 600px;
+}
+.estrade-pack img { position: absolute; inset: 7px; width: calc(100% - 14px); height: calc(100% - 14px); object-fit: contain; transform: rotate(-5deg); }
+.estrade-pack.gl img { visibility: hidden; }
+.estrade-pack img.tourne { animation: gz-tour 760ms var(--courbe) both; }
+@keyframes gz-tour { from { transform: rotate(-5deg) rotateY(0deg); } to { transform: rotate(-5deg) rotateY(360deg); } }
+.estrade-texte { display: flex; flex-direction: column; min-width: 0; padding-top: 2px; }
+.estrade-code { margin-top: 3px; font: 600 17px/1.15 var(--titre); letter-spacing: -.03em; color: var(--text-1); white-space: nowrap; }
+.estrade-texte .segments { margin-top: auto; }
+/* Le sens : l'icône reste lisible, le curseur prend un filet de la couleur du sens. */
+.segments-sens button { height: 30px; padding: 0 4px; }
+.segments-sens img { width: 22px; height: 22px; transition: transform 220ms var(--retour); }
+.segments-sens button:hover img, .segments-sens button[aria-pressed="true"] img { transform: translateY(-1px) scale(1.08); }
+.segments-sens[data-v="long"] .segments-curseur { box-shadow: inset 0 0 0 1px var(--zest), 0 2px 0 var(--tranche); }
+.segments-sens[data-v="short"] .segments-curseur { box-shadow: inset 0 0 0 1px var(--down), 0 2px 0 var(--tranche); }
+.segments-sens[data-v="long"] button[aria-pressed="true"] { color: var(--zest); }
+.segments-sens[data-v="short"] button[aria-pressed="true"] { color: var(--down); }
+.saisies { display: grid; gap: 8px; }
+.saisies.a-deux { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.champ { display: grid; gap: 4px; min-width: 0; }
+.saisie img { width: 20px; height: 20px; margin-left: -3px; }
+.parts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 5px; padding-bottom: 2px; }
+.parts .petit { padding: 0; }
+.champ-tete { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.champ-tete output, .champ-tete b { font-weight: 600; font-size: 12.5px; line-height: 1; color: var(--text-1); }
+.etiq-icone { display: inline-flex; align-items: center; gap: 5px; }
+.etiq-icone img { width: 20px; height: 20px; }
+/* Le levier : une piste fine, la partie choisie en Zest ; quatre crans dessous. */
+.levier-bloc { display: grid; gap: 3px; }
+.levier-bloc.est-coupe { opacity: .45; pointer-events: none; }
+.levier-bloc input[type="range"] { appearance: none; width: 100%; height: 16px; margin: 0; background: none; cursor: pointer; }
+.levier-bloc input[type="range"]::-webkit-slider-runnable-track { height: 4px; border-radius: 2px; background: linear-gradient(to right, var(--zest) var(--rempli, 44%), var(--div-2) var(--rempli, 44%)); }
+.levier-bloc input[type="range"]::-webkit-slider-thumb { appearance: none; width: 14px; height: 14px; margin-top: -5px; border: 3px solid var(--bg); border-radius: 50%; background: var(--text-1); box-shadow: 0 0 0 1px var(--div-3), 0 2px 0 var(--noir); transition: transform 120ms var(--courbe); }
+.levier-bloc input[type="range"]:hover::-webkit-slider-thumb { transform: scale(1.1); }
+.levier-bloc input[type="range"]:active::-webkit-slider-thumb { background: var(--zest); }
+.levier-bloc input[type="range"]::-moz-range-track { height: 4px; border-radius: 2px; background: var(--div-2); }
+.levier-bloc input[type="range"]::-moz-range-progress { height: 4px; border-radius: 2px; background: var(--zest); }
+.levier-bloc input[type="range"]::-moz-range-thumb { width: 8px; height: 8px; border: 3px solid var(--bg); border-radius: 50%; background: var(--text-1); box-shadow: 0 0 0 1px var(--div-3); }
+.levier-bloc input[type="range"]:focus-visible { outline-offset: 3px; }
+.crans { display: flex; justify-content: space-between; margin: 0 -4px; }
+.crans button { appearance: none; padding: 1px 4px; border: 0; border-radius: 4px; background: none; color: var(--text-3); font: 600 10px/1 var(--texte); cursor: pointer; transition: color 120ms var(--courbe); }
+.crans button:hover { color: var(--text-1); }
+.crans button[aria-pressed="true"] { color: var(--zest); }
+.options { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 11.5px; }
+.erreur { font-size: 11.5px; line-height: 1.35; color: var(--down); }
+.marge-liq { display: grid; gap: 5px; }
+.recap { display: grid; gap: 3px; margin: 0; padding-top: 8px; border-top: 1px solid var(--div-1); }
+.recap > div { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; font-size: 12px; line-height: 1.35; }
+.recap dt { color: var(--text-3); }
+.recap dd { margin: 0; font-weight: 600; color: var(--text-1); white-space: nowrap; }
+.recap dd.attente { font-weight: 500; color: var(--text-3); }
+.envoi { width: 100%; height: 36px; margin-bottom: 4px; justify-content: center; font-size: 12px; }
+.envoi.est-short { --tranche: var(--down-dark); --reflet: rgb(245 246 238 / .45); background: var(--down); border-color: var(--down); color: var(--on-zest); }
+.envoi.est-short:hover { background: var(--down); border-color: var(--down); }
+.envoi.est-short:active { background: var(--down-dark); border-color: var(--down-dark); }
+.envoi.est-short[aria-busy="true"] { background: var(--down-25); border-color: var(--down-25); color: var(--text-1); }
+.envoi:disabled, .envoi.est-short:disabled { --tranche: var(--noir); background: var(--paper); border-color: var(--div-1); color: var(--text-3); }
+.suite { display: flex; align-items: center; min-height: 22px; }
+.accuse { display: flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 600; color: var(--text-1); animation: gz-accuse 300ms var(--courbe) both; }
+.accuse img { width: 22px; height: 22px; }
+@keyframes gz-accuse { from { opacity: 0; filter: blur(3px); transform: translateY(5px); } }
+
+/* ---------- Le compte de démo, en bref ---------- */
+.compte { display: grid; gap: 8px; padding: var(--bord); }
+.compte-tete { display: flex; align-items: center; gap: 7px; }
+.compte-tete img { width: 24px; height: 24px; }
+.compte-tete .note { margin-left: auto; text-align: right; }
+.compte-faits { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 12px; margin: 0; }
+.compte-faits dt, .bilan dt { font: 600 10px/1.2 var(--texte); letter-spacing: .07em; text-transform: uppercase; color: var(--text-3); }
+.compte-faits dd { margin: 1px 0 0; font-weight: 600; font-size: 13px; line-height: 1.25; color: var(--text-1); }
+.compte-faits dd.hausse, .bilan dd.hausse { color: var(--zest); }
+.compte-faits dd.baisse, .bilan dd.baisse { color: var(--down); }
+
+/* ---------- Bas : onglets, tableaux, compte ---------- */
+.onglets-rang { flex: none; display: flex; align-items: center; justify-content: space-between; gap: 10px; height: var(--pan); padding-right: var(--bord); border-bottom: 1px solid var(--div-1); }
+.onglets { position: relative; display: flex; height: 100%; padding: 0 4px; }
+.onglets button {
+  appearance: none; display: inline-flex; align-items: center; gap: 6px; height: 100%; padding: 0 9px; border: 0; background: none;
+  color: var(--text-3); font: 600 10.5px/1 var(--texte); letter-spacing: .07em; text-transform: uppercase; white-space: nowrap; cursor: pointer;
+  transition: color 160ms var(--courbe);
+}
+.onglets button:hover { color: var(--text-1); }
+.onglets button[aria-selected="true"] { color: var(--text-1); }
+.onglets button:focus-visible { outline-offset: -4px; }
+.onglets-curseur { position: absolute; left: 0; bottom: -1px; width: 0; height: 1px; background: var(--zest); }
+.pret .onglets-curseur { transition: transform 220ms var(--courbe), width 220ms var(--courbe); }
+.compteur { min-width: 16px; padding: 2px 4px; border-radius: 4px; background: var(--muted); color: var(--text-2); font-size: 10px; letter-spacing: 0; text-align: center; }
+.compteur.a-du-monde { background: var(--zest-12); color: var(--zest); }
+.onglets-gestes { display: flex; align-items: center; gap: 8px; padding-bottom: 2px; }
+.panneau { flex: 1; min-height: 0; overflow: auto; scrollbar-width: thin; scrollbar-color: var(--div-2) transparent; }
+.panneau:focus-visible { outline-offset: -2px; }
+.cellule-jauge .jauge { display: inline-block; width: 40px; margin-right: 6px; vertical-align: middle; }
+.cellule-jauge b { display: inline-block; min-width: 4.6ch; font-weight: 600; vertical-align: middle; }
+.liquidee .qui i { color: var(--down) !important; }
+/* L'éditeur de TP / SL : une ligne qui s'ouvre sous la position. */
+.editeur td { height: 40px; background: var(--paper); }
+.editeur-rang { display: flex; align-items: center; gap: 8px; }
+.editeur-rang .saisie { width: 132px; height: 26px; }
+.editeur-rang .erreur { margin-left: 4px; }
+/* Le compte : le bilan de la session à gauche, la courbe d'équité à droite. */
+.compte-vue { display: grid; grid-template-columns: minmax(0, 420px) minmax(0, 1fr); }
+.compte-vue[hidden] { display: none !important; }
+.bilan { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-content: start; gap: 10px 16px; margin: 0; padding: 12px var(--bord); border-right: 1px solid var(--div-1); }
+.bilan dd { margin: 2px 0 0; font-weight: 600; font-size: 13px; color: var(--text-1); }
+.equite { display: flex; flex-direction: column; min-width: 0; min-height: 0; margin: 0; padding: 10px var(--bord); }
+.equite figcaption { display: flex; align-items: center; gap: 8px; }
+.equite canvas { flex: 1; width: 100%; min-height: 60px; margin-top: 6px; }
+
+/* ---------- La mention des marques, en pied de la colonne du ticket ---------- */
+.mentions { position: absolute; right: 0; bottom: 0; width: var(--cote-l); padding: 8px var(--bord) 10px; border-top: 1px solid var(--div-1); border-left: 1px solid var(--div-1); background: var(--bg); font-size: 10.5px; line-height: 1.4; color: var(--text-3); }
+
+/* ---------- Écran court : le compte en bref laisse la place au ticket (il reste dans la barre d'état et l'onglet Account) ---------- */
+@media (max-height: 850px) and (min-width: 901px) { .compte, .fiche-texte { display: none; } .ticket { border-bottom: 0; } .terminal { grid-template-rows: 44px minmax(0, 1fr) 220px; } }
+
+/* ---------- Écran moyen : mêmes panneaux, colonnes plus étroites ---------- */
+@media (max-width: 1340px) {
+  :root { --cote-l: 264px; }
+  .terminal { grid-template-columns: 224px minmax(0, 1fr) 200px var(--cote-l); }
+  .carnet .pan-tete:first-child .simule, .outils-fin { display: none; }
+  .outils .petit { margin-left: auto; }
+}
+/* ---------- Sous 1180 px : les marchés passent en bande, le reste garde sa disposition ---------- */
+@media (max-width: 1180px) {
+  .terminal { grid-template-columns: minmax(0, 1fr) 200px var(--cote-l); grid-template-rows: 34px 44px minmax(0, 1fr) 220px; }
+  .marches { grid-column: 1 / 4; grid-row: 1; flex-direction: row; border-right: 0; border-bottom: 1px solid var(--div-1); }
+  .marches .pan-tete, .fiche, .liste thead, .ligne-detail, .liste .col-ep { display: none; }
+  .liste-boite { flex: 1; min-width: 0; }
+  .liste { display: flex; height: 33px; }
+  .paire { flex: 1; display: flex; align-items: center; border-right: 1px solid var(--div-1); }
+  .paire:last-of-type { border-right: 0; }
+  .ligne-marche { display: flex; align-items: center; justify-content: space-between; gap: 8px; width: 100%; padding: 0 var(--bord); }
+  .ligne-marche td { display: block; height: auto; padding: 0; }
+  .marches-curseur { box-shadow: inset 0 -1px 0 var(--zest); }
+  .entete { grid-column: 1 / 3; grid-row: 2; }
+  .centre { grid-column: 1; grid-row: 3; }
+  .carnet { grid-column: 2; grid-row: 3; }
+  .bas { grid-column: 1 / 3; grid-row: 4; }
+  .cote { grid-column: 3; grid-row: 2 / 5; }
+}
+
+/* ---------- Tablette et téléphone : une colonne, le ticket sous le graphique ---------- */
+@media (max-width: 900px) {
+  body.app { overflow: auto; }
+  .terminal { display: flex; flex-direction: column; height: auto; min-height: 0; padding-bottom: var(--etat-h); }
+  .marches { overflow-x: auto; scrollbar-width: none; }
+  .marches::-webkit-scrollbar { display: none; }
+  .paire { flex: 0 0 auto; }
+  .ligne-marche { gap: 12px; }
+  .entete { order: 1; flex-wrap: wrap; gap: 8px 16px; padding: 10px var(--bord); overflow: visible; }
+  .mesures { flex-wrap: wrap; gap: 8px 16px; }
+  .centre { order: 2; }
+  .graphe { flex: none; height: 300px; }
+  .outils { overflow-x: auto; scrollbar-width: none; }
+  .outils::-webkit-scrollbar { display: none; }
+  .outils .option, .outils .segments, .outils .petit { flex: none; }
+  .cote { order: 3; padding-bottom: 0; overflow: visible; border-left: 0; border-top: 1px solid var(--div-1); }
+  .mentions { position: static; order: 6; width: auto; border-left: 0; padding: 12px var(--bord) 14px; font-size: 11px; }
+  .compte { display: grid; border-bottom: 1px solid var(--div-1); }
+  .carnet { order: 4; border-left: 0; overflow: visible; }
+  .echanges { flex: none; overflow: visible; }
+  .bas { order: 5; }
+  .onglets-rang { height: auto; flex-wrap: wrap; padding-right: 0; }
+  .onglets { height: var(--pan); overflow-x: auto; scrollbar-width: none; max-width: 100%; }
+  .onglets::-webkit-scrollbar { display: none; }
+  .onglets-gestes { padding: 6px var(--bord) 8px; }
+  .panneau { overflow: visible; }
+  .compte-vue { grid-template-columns: minmax(0, 1fr); }
+  .bilan { border-right: 0; border-bottom: 1px solid var(--div-1); }
+  .equite canvas { flex: none; height: 120px; }
+  .centre.plein { top: 0; z-index: 44; }
+  .app .alertes { left: 12px; right: 12px; width: auto; }
+}
+@media (max-width: 720px) {
+  /* Les tableaux du bas deviennent des fiches : une étiquette au-dessus de chaque valeur. */
+  .bas .grille, .bas .grille tbody { display: block; }
+  .bas .grille thead { display: none; }
+  .bas .grille tr { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px 12px; padding: 12px var(--bord); border-bottom: 1px solid var(--div-1); }
+  .bas .grille td, .bas .grille td.num { display: block; height: auto; padding: 0; border: 0; text-align: left; white-space: normal; }
+  .bas .grille td::before { content: attr(data-l); display: block; margin-bottom: 3px; font: 600 10px/1.2 var(--texte); letter-spacing: .07em; text-transform: uppercase; color: var(--text-3); }
+  .bas .grille td:first-child, .bas .grille td.act { grid-column: 1 / -1; }
+  .bas .grille td:first-child::before, .bas .grille td.act::before { content: none; }
+  .bas .grille td.act { width: auto; display: flex; gap: 6px; }
+  .bas .grille td.act .petit { flex: 1; height: 30px; margin: 0; }
+  .bas .grille tr.neuf td { animation: none; }
+  .bas .grille tr.editeur { display: block; }
+  .editeur-rang { flex-wrap: wrap; }
+}
+@media (max-width: 480px) { :root { --barre-h: 59px; } }
+
+/* Le jeton dans la barre de l'app : seulement quand la place est là. */
+@media (max-width: 1100px) { .app .puce-jeton, .page-marches .puce-jeton { display: none; } }

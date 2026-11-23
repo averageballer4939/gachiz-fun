@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; base-uri 'none'; form-action 'none'">
+<meta name="theme-color" content="#111210">
+<meta name="description" content="Gachiz markets: four trading-card indexes, Pokémon, One Piece, Yu-Gi-Oh! and sports cards. Demo values, simulated in your browser.">
+<title>Gachiz: markets (demo)</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../fonts/sora-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../fonts/saira-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="../trade/terminal.css">
+<link rel="stylesheet" href="markets.css">
+</head>
+<body class="page-marches dense">
+
+<aside class="bandeau" aria-label="Demo notice">
+  <p class="bandeau-titre"><img src="../icons/sablier.webp" alt="" width="30" height="30">Demo · not live yet</p>
+  <div class="bandeau-fil">
+    <ul class="bandeau-piste">
+      <li><img src="../icons/machine.webp" alt="" width="32" height="32">Gachiz is in demo mode</li>
+      <li><img src="../icons/indice.webp" alt="" width="32" height="32">Index values are simulated, in points</li>
+      <li><img src="../icons/marge.webp" alt="" width="32" height="32">Paper orders and demo credits, no funds</li>
+      <li><img src="../icons/bouclier.webp" alt="" width="32" height="32">Nothing is sent on-chain</li>
+      <li><img src="../icons/cloche.webp" alt="" width="32" height="32">Launch news on X: @gachizfun</li>
+      <li aria-hidden="true"><img src="../icons/machine.webp" alt="" width="32" height="32">Gachiz is in demo mode</li>
+      <li aria-hidden="true"><img src="../icons/indice.webp" alt="" width="32" height="32">Index values are simulated, in points</li>
+      <li aria-hidden="true"><img src="../icons/marge.webp" alt="" width="32" height="32">Paper orders and demo credits, no funds</li>
+      <li aria-hidden="true"><img src="../icons/bouclier.webp" alt="" width="32" height="32">Nothing is sent on-chain</li>
+      <li aria-hidden="true"><img src="../icons/cloche.webp" alt="" width="32" height="32">Launch news on X: @gachizfun</li>
+    </ul>
+  </div>
+</aside>
+
+
+<header class="barre">
+  <div class="barre-gauche">
+    <a class="puce puce-logo" href="../" aria-label="Gachiz, home">
+      <svg viewBox="0 0 136.6 107" aria-hidden="true">
+        <polygon points="47.34,0 124.34,0 99.51,43 72.17,43 49.65,82 64.08,107 14.43,107 0,82"/>
+        <polygon points="86.6,68 136.6,68 114.08,107 64.08,107"/>
+      </svg>
+    </a>
+    <nav class="liens" aria-label="Main">
+      <a class="puce" href="../trade/">Trade</a>
+      <a class="puce est-ici" href="./" aria-current="page">Markets</a>
+      <a class="puce" href="../docs/">Docs</a>
+    </nav>
+  </div>
+  <div class="barre-droite">
+    <button class="puce puce-jeton" type="button" data-jeton aria-label="GACHIZ token: copy the contract address"><img src="../icons/marge.webp" alt="" width="30" height="30"><span class="jeton-nom">GACHIZ</span><span class="jeton-ca" data-jeton-ca>CA soon</span></button>
+    <p class="temoin"><span class="temoin-point" aria-hidden="true"></span>Demo · simulated data</p>
+    <div class="wallet">
+      <button class="puce puce-zest" id="wallet-bouton" type="button" aria-haspopup="true" aria-expanded="false">Connect</button>
+      <div class="wallet-menu" id="wallet-menu" hidden></div>
+    </div>
+  </div>
+</header>
+
+<main class="marches-page">
+
+  <header class="titre-rang apparait">
+    <div>
+      <h1>Markets</h1>
+      <p class="sous-titre">One index per trading-card license: Pokémon, One Piece, Yu-Gi-Oh! and sports cards. Long or short each one.</p>
+    </div>
+    <div class="titre-gestes">
+      <span class="simule">Simulated in your browser, in points</span>
+      <a class="puce puce-zest" href="../trade/">Open the trading demo</a>
+    </div>
+  </header>
+
+  <section class="cadre-t apparait" aria-label="All markets">
+    <header class="pan-tete">
+      <h2 class="pan-titre">All markets</h2>
+      <span class="simule">Demo values</span>
+      <label class="recherche"><span class="cache">Search an index</span><input id="cherche" type="search" placeholder="Search" autocomplete="off" spellcheck="false"></label>
+    </header>
+    <div class="defile">
+      <table class="grille tableau">
+        <thead id="tableau-tete"><tr><th class="col-ep"><span class="cache">Pinned</span></th><th data-tri="code" data-sens="haut">Index</th><th class="num" data-tri="prix">Demo value, pts</th><th class="num" data-tri="variation">2h change</th><th class="num" data-tri="haut">2h high</th><th class="num" data-tri="bas">2h low</th><th class="num" data-tri="ampleur">2h range</th><th class="num">Last tick</th><th>2h curve</th><th>Composition</th><th>Funding</th><th><span class="cache">Trade</span></th></tr></thead>
+        <tbody id="tableau-corps"></tbody>
+      </table>
+      <p class="liste-vide" id="tableau-vide" hidden>No index matches this search.</p>
+    </div>
+  </section>
+
+  <section class="familles" id="familles" aria-label="The four indexes"></section>
+  <noscript><p class="note">The demo values on this page are simulated in the browser and need JavaScript.</p></noscript>
+
+  <div class="deux-colonnes">
+    <section class="cadre-t explication apparait" id="index" aria-label="What an index is">
+      <header class="pan-tete"><h2 class="pan-titre">What an index is</h2></header>
+      <div class="explication-grille">
+        <ol class="points">
+          <li><img src="../icons/cartes.webp" alt="" width="384" height="384" decoding="async"><p><b>Many sales.</b>Cards of the same license change hands again and again, each time at their own price.</p></li>
+          <li><img src="../icons/indice.webp" alt="" width="384" height="384" decoding="async"><p><b>One number.</b>An index folds those sales into a single value that moves with them.</p></li>
+          <li><img src="../icons/long.webp" alt="" width="384" height="384" decoding="async"><p><b>Two sides.</b>Long if you think the number rises, short if you think it falls. You never hold the object.</p></li>
+        </ol>
+        <figure class="dessin apparait" id="dessin">
+          <svg viewBox="0 0 520 240" width="520" height="240" role="img" aria-label="Schematic: several sales feed one index; the index moves; from it, a long or a short is possible.">
+            <defs>
+              <linearGradient id="fondu-indice" gradientUnits="userSpaceOnUse" x1="232" y1="0" x2="404" y2="0">
+                <stop offset="0" class="arret-zest" stop-opacity="0"/>
+                <stop offset="1" class="arret-zest" stop-opacity="1"/>
+              </linearGradient>
+            </defs>
+            <path class="trait plein t1" pathLength="1" d="M46 30 H128 V120 H208"/>
+            <path class="trait plein t2" pathLength="1" d="M46 75 H128"/>
+            <path class="trait plein t3" pathLength="1" d="M46 120 H128"/>
+            <path class="trait plein t4" pathLength="1" d="M46 165 H128"/>
+            <path class="trait plein t5" pathLength="1" d="M46 210 H128 V120"/>
+            <path class="trait bouge t6" pathLength="1" stroke="url(#fondu-indice)" d="M232 120 L256 107 L276 125 L300 93 L324 111 L350 83 L378 101 L404 87"/>
+            <path class="trait possible long" d="M404 87 L470 43"/>
+            <path class="trait possible short" d="M404 87 L470 161"/>
+            <g class="noeud"><circle cx="40" cy="30" r="6"/><circle class="point" cx="40" cy="30" r="2"/></g>
+            <g class="noeud"><circle cx="40" cy="75" r="6"/><circle class="point" cx="40" cy="75" r="2"/></g>
+            <g class="noeud"><circle cx="40" cy="120" r="6"/><circle class="point" cx="40" cy="120" r="2"/></g>
+            <g class="noeud"><circle cx="40" cy="165" r="6"/><circle class="point" cx="40" cy="165" r="2"/></g>
+            <g class="noeud"><circle cx="40" cy="210" r="6"/><circle class="point" cx="40" cy="210" r="2"/></g>
+            <g class="noeud grand-noeud"><circle cx="220" cy="120" r="12"/><circle class="point" cx="220" cy="120" r="4"/></g>
+            <g class="noeud noeud-long"><circle cx="476" cy="39" r="7"/><circle class="point" cx="476" cy="39" r="2.5"/></g>
+            <g class="noeud noeud-short"><circle cx="476" cy="165" r="7"/><circle class="point" cx="476" cy="165" r="2.5"/></g>
+            <text class="mot" x="56" y="16">Sales</text>
+            <text class="mot" x="220" y="153" text-anchor="middle">Index</text>
+            <text class="mot mot-long" x="476" y="22" text-anchor="middle">Long</text>
+            <text class="mot mot-short" x="476" y="191" text-anchor="middle">Short</text>
+          </svg>
+          <figcaption class="cles">
+            <span><i class="cle cle-plein"></i>Solid: what happened</span>
+            <span><i class="cle cle-bouge"></i>Fading: what moves</span>
+            <span><i class="cle cle-possible"></i>Dashed: what you may do</span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="cadre-t apparait" aria-label="What is not announced yet">
+      <header class="pan-tete"><h2 class="pan-titre">Not announced yet</h2><img class="pan-icone" src="../icons/sablier.webp" alt="" width="384" height="384" decoding="async"></header>
+      <dl class="non-annonce">
+        <div><dt>Composition of each index</dt><dd>Not announced yet</dd></div>
+        <div><dt>Price source</dt><dd>Not announced yet</dd></div>
+        <div><dt>Funding</dt><dd>Not announced yet</dd></div>
+        <div><dt>Fees</dt><dd>Not announced yet</dd></div>
+        <div><dt>Leverage</dt><dd>Not announced yet</dd></div>
+        <div><dt>Open interest, volume</dt><dd>n/a in demo</dd></div>
+      </dl>
+      <div class="suite-doc">
+        <img src="../icons/livre.webp" alt="" width="384" height="384" decoding="async">
+        <p>The doc says what each index follows, what is live and what is still open.</p>
+        <a class="petit" href="../docs/#index-families">The indexes, in the doc</a>
+      </div>
+    </section>
+  </div>
+
+  <p class="mentions">Pokémon, One Piece and Yu-Gi-Oh! are trademarks of their owners. Gachiz is an independent project and is not affiliated with them.</p>
+
+</main>
+
+<footer class="etat-barre" aria-label="Status">
+  <span class="etat-demo"><span class="etat-point" aria-hidden="true"></span>Demo</span>
+  <span>Local time <b id="etat-heure"></b></span>
+  <span class="etat-sim">Simulated index · 1 tick per second · same values as the trading demo</span>
+  <span>Wallet <b id="etat-wallet">not connected</b></span>
+  <span class="etat-fin">
+    <a class="lien" href="../">Home</a><a class="lien" href="../docs/">Docs</a><a class="lien" href="https://x.com/gachizfun" rel="noopener">@gachizfun</a>
+    <button class="petit" id="reglages-bouton" type="button" aria-haspopup="true" aria-expanded="false">Settings</button>
+  </span>
+</footer>
+<div class="reglages" id="reglages" role="dialog" aria-label="Demo settings" hidden>
+  <p class="etiq">Demo settings</p>
+  <div class="reglages-rang"><span>Animations</span><button class="bascule" type="button" data-reglage="animations" aria-pressed="true" aria-label="Animations"></button></div>
+  <div class="reglages-rang"><span>Density</span><span class="deux-touches"><button class="petit" type="button" data-densite="compact">Compact</button><button class="petit" type="button" data-densite="aere">Roomy</button></span></div>
+  <p class="note">The demo account is reset from the trading screen.</p>
+</div>
+
+<script src="../commun.js" defer></script>
+<script src="../trade/indice.js" defer></script>
+<script src="../trade/chiffres.js" defer></script>
+<script src="../trade/terminal.js" defer></script>
+<script src="markets.js" defer></script>
+</body>
+</html>

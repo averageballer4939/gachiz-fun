@@ -1,0 +1,1313 @@
+Gachiz docs, plain text. Source: https://www.gachiz.fun/docs/
+
+# How Gachiz works.
+Perpetual markets on trading-card indexes: Pokémon, One Piece, Yu-Gi-Oh! and sports cards, on Robinhood Chain. Today: a preview and a demo.
+
+Pick a path below. Each page covers one thing: what it is, where to press, what the demo does, and what is not announced yet.
+
+Open the demo
+Start with Connect
+See what is live
+
+## The home page, in one picture
+
+The home page shows the four markets as packs on a ring. The pack in front is a market: its two buttons open the demo on it.
+
+Trade, Docs. The demo and these docs, one press away from any page.
+Connect. Opens the wallet window. Read-only: see Connect a wallet.
+Drag to spin. The ring of packs turns on its own. Drag it, or scroll, to spin it.
+Market in front. The pack facing you is the market named under the ring.
+Previous, next. The two arrows bring another pack to the front.
+Long, Short. Both open the demo on the market in front, with the side already chosen.
+
+## Start here
+
+Connect a wallet: What the site reads, and what it never asks.
+
+Long and short: Two sides of one index, and the ticket that opens them.
+
+Liquidation: Where a position closes by itself.
+
+## How to read the pictures
+
+The pictures in these docs are real screens of the site, taken in the demo. Each one carries numbered rings.
+
+A numbered ring marks a spot on the screen. The same number comes back under the picture, with one sentence.
+A solid line leads to something fixed: a button, a field, a column.
+A fading line leads to something that moves: a level, a PnL, a state.
+A dashed line leads to something optional: a shortcut, a second way to do it.
+
+Levels in the pictures are examples
+The index is simulated and the credits are demo credits. A level or a PnL shown in a picture says nothing about a real market.
+
+## All pages
+
+Status: Live, demo, not announced: the state of every piece.
+Connect a wallet: The window, the four steps, what is read, what can go wrong.
+Network: Chain id, gas token, the network alert and its Switch button.
+The indexes: PKMN-IDX, OP-IDX, YGO-IDX and SPORTS-IDX: what each one would follow.
+Index price: Points, percent moves, and how to read the chart of the demo.
+Perpetuals: What a perp is, in five ideas, and how it differs from holding the item.
+Long and short: Two sides, the order ticket field by field, a worked example.
+Leverage and margin: Size, margin and leverage, with the distance to liquidation at each step.
+Liquidation: How a position gets closed, the demo formula, and how to stay away.
+Funding: Who pays whom, why a perp needs it, a worked example.
+Trade screen: Every zone of the screen, the chart tools, the status bar, a first paper trade, the demo settings.
+Order types: Market, limit and stop orders, reduce only, target and stop loss, the two order tabs.
+Positions: The Positions tab column by column, the PnL math, closing, the history and account tabs.
+Fees: Trading fee, funding, gas, and the state of each on Gachiz.
+What Connect reads: A checklist of what the preview can and cannot do with your wallet.
+Risks: What can go wrong, written plainly.
+Glossary: From Available to Side: every word on the screen.
+
+
+# Status
+What is live today, what runs as a demo, and what has not been announced.
+
+Check this page before any other: it says what exists today. The other pages never go further than this one.
+
+## Live today
+
+Piece | State | What it means |
+The site | Live | gachiz.fun is online as a preview. The four markets turn on the home page as packs. |
+Connect | Live | A wallet connects from the top bar. The site reads your address and your network. Nothing else. |
+The demo | Demo | The trade screen runs with a simulated index, in points, and paper orders in demo credits. Nothing is on-chain. |
+These docs | Live | Updated when a piece changes state. |
+
+## Not live
+
+Trading with funds. No order is sent and no funds are taken. Every order in the demo is a paper order.
+Deposits and withdrawals. There is nothing to deposit into. Demo credits have no value and cannot leave the demo.
+Market prices. The demo index is simulated in your browser. It does not follow real sales.
+Funding. The demo does not simulate it. See Funding for what it is.
+
+## The demo settings
+
+The demo needs numbers to run. These are its own settings. They are written here so every example in these docs can be checked on screen.
+
+Setting | In the demo |  |
+Starting credits | 10,000 simulated credits, reset at each reload | Demo setting |
+Leverage | 1× to 10× | Demo setting |
+Fee, funding | None | Demo setting |
+Maintenance margin | 2.5% of the position size | Demo setting |
+Smallest margin | 10 credits | Demo setting |
+At once | 8 open positions, and 8 limit orders that wait | Demo setting |
+Index | Simulated in your browser from the clock, one step per second, two hours kept | Demo setting |
+
+A demo setting is not a product parameter
+None of these numbers is a decision about the product. The matching parameters of Gachiz are in the next table: not announced yet.
+
+## Not announced yet
+
+Parameter | State |
+Launch date | Not announced yet |
+Items in each index, and the price source | Not announced yet |
+Maximum leverage | Not announced yet |
+Collateral asset | Not announced yet |
+Trading fees, and the team share | Not announced yet |
+Funding interval and formula | Not announced yet |
+Liquidation rules | Not announced yet |
+Order types | Not announced yet |
+
+## The GACHIZ token
+
+Planned. A GACHIZ token is planned.
+No contract address yet. Today there is none: nothing to copy, nothing to add to a wallet.
+Any address seen elsewhere is not ours. A message, a reply or an ad that gives one is not from Gachiz.
+Where it will show. The day it exists, the address is written in the top bar and in the footer of the site, with a button to copy it.
+
+The footer of the home page already holds the place of the address.
+
+The machine. Press it: a capsule comes out and lands on one of the four stands, one per index.
+Sound. Sound on or sound off. The sounds are soft clicks.
+Token block. The place of the GACHIZ contract address. Today it holds none.
+Copy CA. With no address to copy, the button answers that GACHIZ has no contract address yet.
+
+## One rule for these docs
+
+A number appears in these docs only when it is a fact. A fact of the network, like the chain id. A setting of the demo, marked as such. Or general math, marked as an example. Until a parameter of the product is decided, the page says Not announced yet.
+
+When a state changes
+This page changes first. Then the page of the piece. A parameter never appears on another page before it is listed here.
+
+
+# Connect a wallet
+One press in the top bar. The site reads your address and your network, then stops.
+
+Open gachiz.fun and press Connect in the top bar. A window lists the wallets found in your browser: pick yours, then approve in your wallet.
+
+## The window
+
+The window opens over the page. It says what it does before you choose anything.
+
+What it reads. The notice is the whole deal: your address, your network, no transaction.
+Close. The cross, the Escape key or a press outside closes the window. Nothing is shared.
+Wallet found. One row per wallet your browser announces. Press yours.
+Its state. Detected at rest. Waiting for your wallet while your wallet asks you to approve.
+Target network. Robinhood Chain, chain id 4663. Connect works from another network too.
+The wallet row is a stand-in made for this picture. Your own wallet shows its name and its logo.
+
+## Connect in four steps
+
+Press Connect
+The Connect button is at the right of the top bar, on the home page and in the demo.
+
+Pick your wallet
+Each wallet found in your browser has a row, tagged Detected. Press yours: the tag becomes Waiting for your wallet.
+
+Approve in your wallet
+Your wallet asks to share your address with the site. There is no payment and no signature to give.
+
+Read the answer
+An alert says Wallet connected, with the name of the wallet and a short form of your address. The button in the top bar now shows that short address.
+
+## What the site reads
+
+Your address. It is public: anyone can already see it on-chain.
+Your network. The chain id your wallet is set to. If it is not Robinhood Chain, an alert says so: see Network.
+
+## What it never asks
+
+A transaction. The preview has none to send.
+A signature. Nothing is signed when you connect.
+A seed phrase or a private key. No page of Gachiz asks for one. A page that does is not Gachiz.
+
+## Once connected
+
+Press the short address in the top bar. A menu opens with your address, the name of your wallet and your network.
+
+Copy address copies the full address. An alert confirms: Address copied.
+Disconnect makes the site forget the address. An alert confirms: Wallet disconnected.
+
+## What can go wrong
+
+You see | What it means | What to do |
+No wallet found in this browser. | The browser announced no wallet. | Install a wallet extension, or open the site in the browser of your wallet app. Then reload. |
+Connection cancelled in the wallet. | You closed or refused the request in your wallet. | Nothing was shared. Press your wallet again when ready. |
+The wallet did not connect. Try again. | The wallet did not answer. | Open the wallet, unlock it, then press its row again. |
+Your wallet is on another network | You are connected, on a network other than Robinhood Chain. | Switch, or stay: see Network. |
+
+The demo works without a wallet
+Connecting changes nothing to the paper orders.
+
+The full checklist is on What Connect reads.
+
+
+# Network
+Gachiz targets Robinhood Chain, an EVM network. Here is what your wallet needs.
+
+Open the network list of your wallet and look for Robinhood Chain. If it is missing, add it with the values below.
+
+## Network values
+
+Field | Value |
+Name | Robinhood Chain |
+Chain ID | 4663 (0x1237 in hex) |
+Gas token | ETH |
+Kind | EVM network: your usual address works |
+Testnet chain ID | 46630 |
+
+Take the RPC address from the source
+Copy the RPC address from the documentation of the network itself. Never from a message, a reply or an ad.
+
+## On another network
+
+Connect works from any network. If your wallet is not on Robinhood Chain, an alert appears a moment after you connect, at the bottom right of the page, with a soft click.
+
+What happened. The title says it in one line. The line under it says why it matters.
+Dismiss. The cross closes the alert at once.
+Switch network. Optional. Your wallet then asks you to confirm the change: it is not a transaction.
+Closes by itself. The bar at the bottom runs out after a few seconds, then the alert leaves.
+
+## Switch network
+
+Press Switch network
+The Switch network button is in the alert. The alert stays for a few seconds, then leaves by itself.
+
+Confirm in your wallet
+Your wallet asks you to confirm the change of network. It is a setting of your wallet, not a transaction: it costs no gas.
+
+Read the answer
+When the network changes, an alert says Network: Robinhood Chain.
+
+You see | What it means | What to do |
+Add Robinhood Chain to your wallet first | Your wallet does not know the network yet. | Add it in your wallet with the values above, then press Switch network again. |
+The network did not change | You refused the request, or the wallet did not answer. | Nothing changed. Switch from your wallet, or stay where you are. |
+
+You can also stay on your network. The menu of your address then reads "another network". The preview and the demo behave the same.
+
+## Gas
+
+Every transaction on the network pays gas in ETH. The preview sends no transaction, so it costs no gas. Connecting, switching network and every paper order of the demo are free.
+
+## Add the network by hand
+
+Open the network list
+In your wallet, find the list of networks and its add button.
+
+Enter the values
+Name, chain id 4663 and gas token ETH, from the table above.
+
+Enter the RPC address
+From the documentation of the network itself. Check the address bar before you copy.
+
+Named, not affiliated
+Robinhood Chain is named here as the network Gachiz targets. Gachiz is an independent project.
+
+
+# The four indexes
+One index per trading-card license. You trade the level of the index, not a single card.
+
+Browse the four indexes on the Markets page or in the Markets list of the demo: each one is a market with its own code, and its own pack.
+
+PKMN-IDX
+Pokémon cards
+An index of Pokémon trading-card sales.
+
+OP-IDX
+One Piece cards
+An index of One Piece trading-card sales.
+
+YGO-IDX
+Yu-Gi-Oh! cards
+An index of Yu-Gi-Oh! trading-card sales.
+
+SPORTS-IDX
+Sports cards
+An index of sports trading-card sales. Which sports it covers is not announced yet.
+
+## What each index would follow
+
+Each index is meant to follow sales of one license. Which cards count, where the prices come from and how they are weighed is not announced yet.
+
+Index | It would follow | Cards in the index |
+PKMN-IDX | Sales of Pokémon trading cards | Not announced yet |
+OP-IDX | Sales of One Piece trading cards | Not announced yet |
+YGO-IDX | Sales of Yu-Gi-Oh! trading cards | Not announced yet |
+SPORTS-IDX | Sales of sports trading cards | Not announced yet |
+
+## The Markets list
+
+In the demo, the four markets sit in a list on the left, each with the small picture of its pack. Press a row: the chart, the book, the ticket and the lines of your positions follow it. Keys 1 to 4 do the same.
+
+Search. Filters the list by code or by name.
+Market in view. The row with the accent bar, with the pack of its index. The chart, the book and the ticket follow it.
+Level, 2h change. The index in points, and its move over the last two hours.
+2h trace. The shape of the last two hours of each index, with its high and its low.
+What it follows. One line on the index in view.
+Not announced yet. Composition, price source, funding, fees and leverage: the screen says so itself. What it shows is simulated, in points.
+
+## Why an index
+
+A single card trades rarely, and one sale can move its price a lot. An index follows many cards at once, so one sale weighs less. You take a view on a whole license: Pokémon cards as a whole, sports cards as a whole.
+
+One number. An index has one level, in points. No list of cards to follow one by one.
+Two sides. You can be long or short the index. See Long and short.
+No card to hold. A position is not a card. See Perpetuals.
+
+## Anatomy of an index
+
+An index turns many sales into one level. The dashed parts are the ones Gachiz has not announced. The solid line at the bottom is what the demo does today.
+
+How an index is built in general, and what the demo does instead.
+
+## In the demo
+
+Each demo index moves around a base level, set once in the demo. The levels differ so the four charts do not look alike.
+
+Market | Base level, in points |  |
+PKMN-IDX | 1,240 | Demo setting |
+OP-IDX | 860 | Demo setting |
+YGO-IDX | 2,150 | Demo setting |
+SPORTS-IDX | 975 | Demo setting |
+
+These are settings of the simulation. They are not prices, and they say nothing about what a card or a pack is worth.
+
+## Proposed, not final
+
+The four indexes are a proposal. The list can change before launch.
+
+Parameter | State |
+Cards in each index | Not announced yet |
+Price source | Not announced yet |
+How often an index updates | Not announced yet |
+Weight of each card | Not announced yet |
+
+Names, not logos
+Pokémon, One Piece and Yu-Gi-Oh! are named in text, to say what an index would follow. They are trademarks of their owners. Gachiz is an independent project and is not affiliated with them.
+
+
+# Index price
+An index is one number that follows the sales of many cards. It moves in points.
+
+Read the number next to a market code: that is the index level, in points. The chart shows how it got there.
+
+Market in view. The pack and the code of the index on screen.
+Level, 2h change. The index now, in points, moving one step per second, and its move over the last two hours.
+Session figures. Paper open interest and paper volume of this session. Funding reads Not announced yet.
+Chart tools. Candle size, candles or line, MA 20, volume, auto scale and expand.
+O, H, L, C. Open, high, low and close of the candle under the pointer, or of the last one, with its volume.
+Your entry. A solid line at the entry of your open position on this market.
+Live level. The dotted line and its tag follow the index.
+Volume. Simulated volume bars, one per candle.
+Time. The time of each candle, on your clock.
+
+## Points, not dollars
+
+An index level is a score, not the price of an item. What counts for a position is the move, in percent.
+
+Example
+General math. An index goes from 1,240 points to 1,302 points: it rose 5%. A position on that index moves by 5% of its size, before costs.
+
+## Read the chart
+
+A candle is the open, the high, the low and the close of the index over one slice of time.
+Its colour says the direction: lime when the close is above the open, orange when it is below.
+Its size is yours to choose: 5s, 30s or 2m per candle.
+The tag on the right is the level now. It moves one step per second.
+The pointer draws a crosshair: the level under it on the right, the time under it at the bottom.
+
+## The lines of your account
+
+When you hold a position or a limit order on the market in view, the chart draws it.
+
+Line | Look | What it marks |
+Entry | Solid, with the side and the leverage | The level where your position opened. |
+Liq. | Dashed, orange | The level where it would close by itself. See Liquidation. |
+Limit | Dashed, grey | The price of an order that waits. See Market and limit. |
+
+A line outside the picture is not drawn
+The chart only covers the levels of the candles on screen. A liquidation level far from the index is real, but off the chart: read it in the Positions tab.
+
+## In the demo
+
+Simulated. Each index is computed in your browser. It does not follow real sales.
+One step per second. The level, the candles and your PnL move together.
+Two hours kept. The header shows the change over those two hours.
+Computed from the clock. A random walk with a fixed seed, drawn from the time. A reload does not change it.
+
+## At launch
+
+Parameter | State |
+Price source | Not announced yet |
+Update interval | Not announced yet |
+Mark price, used to value open positions | Not announced yet |
+
+
+# Perpetuals
+A contract that follows a price, with no end date. You hold it as long as your margin allows.
+
+Start here if perps are new to you: five ideas carry the rest of these docs.
+
+## The idea
+
+A perpetual, or perp, is a position on a price move. You do not buy the cards. You take a side on the index: up or down. If the index moves your way, the position gains. If it moves against you, the position loses, and the loss comes out of what you put down.
+
+## Five ideas
+
+Side: Long gains when the index rises, short when it falls.
+
+Margin: The amount locked behind a position. It absorbs the losses.
+
+Leverage: How much larger the position is than its margin.
+
+Liquidation: When losses reach the margin, the market closes the position.
+
+Funding: A payment between longs and shorts while a position is open.
+
+Index: The one number all of this is measured on.
+
+## A perp, or the item itself
+
+You hold a card
+You own an object.
+You gain only if its price rises.
+You pay it in full.
+Selling takes a buyer, and time.
+
+You hold a perp
+You own a position, not an object.
+You can gain on a rise or on a fall.
+You put down a margin, not the full size.
+You close when you choose, or the market closes you.
+
+## In what order to read
+
+Long and short: pick a side and open a paper position.
+Leverage and margin: size it.
+Liquidation: know where it ends by itself.
+Funding: know what holding it can cost.
+Trade screen: try all of it with demo credits.
+
+## What you do not get
+
+No card and no pack. A position is a number on a market. It cannot be exchanged for an item, and it gives no right over any collectible.
+
+A perp can cost the whole margin
+Read Risks before any trade with funds. Today no funds are involved: the demo runs on credits with no value.
+
+
+# Long and short
+Long if you think the index rises. Short if you think it falls.
+
+Pick a market, then choose Long or Short at the top of the ticket: the side decides which move pays you.
+
+## Two sides
+
+Long
+The index rises: you gain.
+The index falls: you lose.
+Liquidation sits below your entry.
+
+Short
+The index falls: you gain.
+The index rises: you lose.
+Liquidation sits above your entry.
+
+## The path of an order
+
+Three lanes: what you do, what the position becomes, and what the demo account keeps. Read it from left to right.
+
+The path of a paper order, from the ticket to History.
+
+## The ticket, field by field
+
+The ticket is on the right of the trade screen: side, type, margin, leverage, estimates, then one button.
+
+Market. The pack of the market in 3D, and its code.
+Side. Long or Short. The button and the estimates follow your choice.
+Order type. Market opens now. Limit and Stop wait for a price: see Order types.
+Margin. What you put down, in demo credits. The minimum is 10.
+Share buttons. 10%, 25%, 50% or Max of your available credits, in one press.
+Leverage. From 1× to 10× in the demo. The slider, or one of the four presets under it.
+Options. Reduce only, and TP / SL for a target and a stop loss.
+Room before liquidation. How far the index can move against you, in percent. The bar empties as leverage rises.
+Estimates. Entry, value, quantity, liquidation price and what stays available. They update as you type.
+Fees. Not announced yet. The demo charges none.
+Open. The button names the side and the market. It stays off until the ticket is valid.
+
+## Open a paper position
+
+Pick a market
+Press a row in the Markets list. The ticket follows it.
+
+Choose the side
+Long or Short. On the home page, the same two buttons under the ring open the demo with the side already set.
+
+Enter a margin
+Type an amount in credits, or press 10%, 25%, 50% or Max.
+
+Set the leverage
+Drag the slider or press a preset. See Leverage and margin.
+
+Read the estimates
+Entry, value, quantity and liquidation price update as you type, with the room before liquidation above them.
+
+Press the button
+It reads Open long PKMN-IDX, with your side and your market. An alert answers: Paper long opened, then Nothing was sent on-chain.
+
+## A worked example
+
+With the demo settings: a long of PKMN-IDX, 500 credits of margin, 5×, entry at 1,240.00 points.
+
+ | Index rises 5% | Index falls 5% |
+Position size | 2,500.00 | 2,500.00 |
+Index at the close | 1,302.00 pts | 1,178.00 pts |
+Result of the close | +125.00 | −125.00 |
+As a share of the margin | +25% | −25% |
+
+A short of the same size gives the mirror: the right column on a rise, the left one on a fall. The demo takes no fee.
+
+## What can go wrong
+
+The ticket says | Why |
+Enter a number above 0. | The margin field holds something that is not a positive number. |
+Minimum 10 credits. | The margin is under the smallest one the demo takes. |
+Not enough demo credits. | The margin is more than your available credits. The message gives the amount available. |
+Demo limit: 8 open positions at once. | Close one before you open another. |
+Order not placed | The ticket changed while the order was being placed. Check it and press again. |
+
+## From the keyboard
+
+Key | What it does |
+L | Sets the ticket to Long. |
+S | Sets it to Short. |
+M | Steps through Market, Limit and Stop. |
+1 to 4 | Picks one of the four indexes. |
+F | Expands the chart, and back. |
+Enter | In a field of the ticket, sends the order. |
+
+The shortcuts are listed in the status bar, at the bottom of the screen.
+
+## How it ends
+
+A position stays open until you press Close in the Positions tab, or until it is liquidated. See Positions and Liquidation.
+
+
+# Leverage and margin
+Margin is what you put down. Leverage is how much larger the position is.
+
+Set the margin first, then the leverage: together they fix the size of the position, and how far liquidation sits.
+
+Leverage now. The value in use, here 10×, the top of the demo.
+Slider. One step per unit, from 1× to 10×.
+Presets. 1×, 2×, 5× and 10×. The one in use is lit.
+Room before liquidation. At 10× it is down to 7.5%. At 5× it was 17.5%.
+Value. Here 250 credits of margin at 10×: a value of 2,500.
+Liquidation price. Liq. price, est. For a short, it sits above the entry.
+Open. Orange for a short, with the market in the label.
+
+## Margin
+
+Margin is the amount locked behind a position. Losses are taken from it. When it runs out, the position is liquidated. In the demo it is counted in credits, and it leaves your available credits for as long as the position is open.
+
+## Leverage
+
+Position size equals margin times leverage.
+A move of the index, in percent, applies to the size.
+The gain or the loss lands on the margin.
+
+So leverage multiplies the move as felt on your margin. At 5×, a 2% move of the index is a 10% move on your margin, up or down.
+
+## Leverage and the distance to liquidation
+
+With the demo settings, a position is liquidated when the index has moved against it by one over the leverage, minus 2.5%. The table takes an entry at 1,240.00 points.
+
+Leverage | Move that liquidates | Liq. of a long | Liq. of a short |  |
+1× | 97.5% | 31.00 pts | 2,449.00 pts | Demo setting |
+2× | 47.5% | 651.00 pts | 1,829.00 pts | Demo setting |
+5× | 17.5% | 1,023.00 pts | 1,457.00 pts | Demo setting |
+10× | 7.5% | 1,147.00 pts | 1,333.00 pts | Demo setting |
+
+More leverage, closer liquidation
+At 1× the index must lose almost everything. At 10× a move of 7.5% is enough.
+
+## The whole picture
+
+One line per leverage. Each one falls faster than the one before, and stops at its liquidation point.
+
+Margin left against the move of the index, at each leverage of the demo.
+
+## Room before liquidation
+
+The ticket shows that move as a bar, Room before liquidation, with its percent. Raise the leverage and the bar empties. The Positions tab then follows what is left of it, in the column To liq.
+
+## How much margin fits
+
+The demo takes no fee, so the largest margin is your available credits. Max fills the field with them. 10%, 25% and 50% take that share.
+
+## What can go wrong
+
+A margin too small. Under 10 credits, the ticket refuses the order.
+A margin too large. The margin cannot exceed your available credits.
+A size you did not mean. The size follows the leverage. Read Value before you press the button.
+
+## On Gachiz
+
+Parameter | State |
+Maximum leverage | Not announced yet |
+Collateral asset | Not announced yet |
+Margin mode, isolated or cross | Not announced yet |
+Maintenance margin | Not announced yet |
+
+
+# Liquidation
+When losses reach the margin, the market closes the position for you.
+
+Find the liquidation price before you open: it is the level where the position closes by itself. The ticket shows it as Liq. price, est., the Positions tab as Liq.
+
+## How it happens
+
+The index moves against you
+Down for a long, up for a short.
+
+The margin shrinks
+The loss so far is counted against the margin, even while the position is open.
+
+The line is reached
+The market closes the position at the liquidation price. You do not choose the moment.
+
+## Read it on two positions
+
+A long and a short do not read the same way. The liquidation level is on the far side of the entry from where you want the index to go.
+
+Liquidation level. Liq. is fixed when the position opens. Above the entry for the short, below it for the long.
+Entry, mark. The level at the open, and the level now.
+Room left. To liq. is the room left, in percent of the index, with a bar that empties as the index nears the line.
+
+## The formula of the demo
+
+The demo fixes the liquidation price when the position opens, from the entry and the leverage.
+
+Take one over the leverage, and subtract 2.5%, the maintenance margin of the demo.
+For a long, lower the entry by that share. For a short, raise it.
+That level is the liquidation price. It does not move afterwards.
+
+Example
+Entry at 1,240.00 points, 5×. One over 5 is 20%, minus 2.5%: 17.5%. A long is liquidated at 1,023.00 points, a short at 1,457.00 points.
+
+## What you lose
+
+In the demo, a liquidated position loses its whole margin, and nothing more: 500 credits in the example above. An alert says Liquidated with the market and the side, and the Trade history tab keeps the line in orange.
+
+A close you choose is capped the same way: its result can never be worse than the margin.
+
+## Stay away from the line
+
+Use less leverage. The liquidation price moves further from the entry. See the table on Leverage and margin.
+Watch the room. Read To liq. in the Positions tab: the room left, in percent. On the chart, the Liq. line shows when it is in range.
+Close early. You choose the exit, not the market.
+
+## On Gachiz
+
+Parameter | State |
+Maintenance margin | Not announced yet |
+Liquidation fee | Not announced yet |
+Partial liquidation | Not announced yet |
+What is left of the margin after a liquidation | Not announced yet |
+
+
+# Funding
+A payment between longs and shorts that keeps the perp price close to the index.
+
+Check the funding rate before you hold a position for long: it is paid or received for as long as the position is open.
+
+## Who pays whom
+
+The perp trades above the index
+Longs pay shorts.
+Being long costs a little more to hold.
+
+The perp trades below the index
+Shorts pay longs.
+Being short costs a little more to hold.
+
+## Why it exists
+
+A perp has no end date, so nothing forces its price back to the index. Funding does: the crowded side pays the other one, which makes the crowded side less comfortable and the other side more.
+
+## The cycle
+
+The funding cycle of a perp, in general. Not Gachiz parameters.
+
+## A worked example
+
+General math, not Gachiz parameters. Funding is a rate applied to the position size, once per interval.
+
+ | Long | Short |
+Position size | 2,500.00 | 2,500.00 |
+Rate for the interval | +0.01% | +0.01% |
+Payment | pays 0.25 | receives 0.25 |
+
+The payment follows the size, not the margin. With leverage, a small rate is larger once measured against what you put down.
+
+## What to watch
+
+The sign. It says which side pays.
+The interval. A rate per hour and the same rate per day are not the same cost.
+The time you hold. A position held for long pays or receives many intervals.
+
+## In the demo
+
+The demo has no funding. A paper position costs nothing to open, to hold or to close.
+
+## On Gachiz
+
+Parameter | State |
+Funding interval | Not announced yet |
+Rate formula | Not announced yet |
+Rate cap | Not announced yet |
+
+
+# The trade screen
+The demo, zone by zone: a simulated index, paper orders, nothing on-chain.
+
+Open the demo at gachiz.fun/trade, or press Trade in the top bar. Pick a market: every order you place there is a paper order. The banner at the very top says it at all times: Demo · not live yet.
+
+Open the demo
+
+## The screen, zone by zone
+
+Demo banner. Always on top: demo, not live yet.
+Chart. The index in view, with the market summary above it and its tools.
+Book and trades. A simulated order book and the last simulated trades, drawn from the index.
+Markets. The four indexes. Pick one: the rest of the screen follows it.
+What it follows. A card on the market in view, with what is not announced yet.
+Paper ticket. The pack in 3D, side, type, margin, leverage, options. One button places the paper order.
+Demo account. Simulated credits: equity, available, in use, open PnL.
+Tabs. Positions, open orders, order history, trade history and account.
+Status bar. Demo state, local time, wallet, equity, the keys and Settings.
+
+Zone | Where | What it holds |
+Markets | Left, top | The four indexes, with their pack, level, two-hour change, high and low. A search field and a pin per row. |
+What it follows | Left, under the list | One line on the index in view, and what is not announced yet. |
+Market summary | Above the chart | Level, 2h change, 2h high and low, 2h range, last candle, paper open interest and paper volume of the session. Funding reads Not announced yet. |
+Chart | Middle | Candles or a line, simulated volume bars, and the lines of your entries, liquidations and waiting orders. |
+Book and trades | Right of the chart | A simulated order book, then the last simulated trades. Both are drawn from the index. |
+Paper ticket | Right | The pack of the market in 3D, side, type, margin, leverage, options, estimates and one button. |
+Demo account | Right, under the ticket | Equity, available, in use and open PnL, in demo credits. |
+Tabs | Bottom | Positions, Open orders, Order history, Trade history and Account. |
+Status bar | Very bottom | Demo state, local time, wallet, equity, available, the keys, and Settings. |
+
+On a phone the same zones stack in one column: the chart, the ticket, the book, then the tabs.
+
+## The chart tools
+
+A row of tools sits above the chart.
+
+Tool | What it does |
+5s 30s 2m | The time covered by one candle. |
+Candles Line | Candles, or a single line through the closes. |
+MA 20 | A moving average over the last 20 candles. |
+Volume | Simulated volume bars under the candles. |
+Auto scale | Fits the scale to the candles on screen. Off, the scale covers the whole two hours. |
+Expand | Gives the whole screen to the chart. The key F does the same. |
+
+Point at a candle: its open, high, low, close and volume show above the chart.
+
+## The screen as a map
+
+Two things feed the whole screen: the simulated index, and your demo account. The screen can grow, with more bars and more tabs: they read the same two things.
+
+The trade screen as a map: each zone, and what it reads.
+
+## A first paper trade
+
+Pick a market
+Press a row in the Markets list on the left, or a key from 1 to 4.
+
+Fill the ticket
+Side, type, margin, leverage. See the ticket, field by field.
+
+Open
+Press the button. The position appears in Positions, and its entry line on the chart.
+
+Watch it
+Mark and PnL move one step per second. See Positions.
+
+Close
+Press Close on its row, or Close all above the tabs. An alert gives the result.
+
+## The status bar
+
+Demo. The state of the screen. Nothing on it is live.
+Local time. Your clock. The candles and the history use it.
+Simulated index. One step per second, the same values as the Markets page.
+Wallet. Not connected, or the short form of your address and its network.
+Equity and available. The two numbers of the demo account, always in view.
+The keys. L, S, M, 1 to 4 and F. See From the keyboard.
+
+## The demo settings
+
+Press Settings at the end of the status bar.
+
+Setting | What it does |
+Animations | Turns the motion of the screen on or off. Your system setting for reduced motion is always followed. |
+Compact Roomy | The density of the screen. |
+Reset demo account | Clears paper positions, orders and history, and gives back 10,000 demo credits. |
+
+These are the rules the demo runs on.
+
+Setting | In the demo |  |
+Starting credits | 10,000 simulated credits, reset at each reload | Demo setting |
+Leverage | 1× to 10× | Demo setting |
+Fee, funding | None | Demo setting |
+Maintenance margin | 2.5% of the position size | Demo setting |
+Smallest margin | 10 credits | Demo setting |
+At once | 8 open positions, and 8 limit orders that wait | Demo setting |
+Index | Simulated in your browser from the clock, one step per second, two hours kept | Demo setting |
+
+## What is simulated
+
+The index. A simulated level, in points. It does not follow real sales. See Index price.
+The orders. Paper orders: kept by the demo, never sent to a chain.
+The credits. Simulated, with no value. Nothing is deposited and nothing moves.
+
+## What is real
+
+The screen. Its zones, its buttons and its math are the ones being built.
+The wallet connection. If you connect, the site reads your address and your network. The demo works without it.
+
+## Open the demo on a market
+
+A link can set the market and the side. The buttons under the ring of the home page use it.
+
+Part of the link | Values | Effect |
+market | PKMN-IDX, OP-IDX, YGO-IDX or SPORTS-IDX | The market in view when the demo opens. |
+side | long or short | The side already chosen on the ticket. |
+
+Example: gachiz.fun/trade/?market=OP-IDX&side=short opens the demo on One Piece cards, ticket set to Short. The Long and Short buttons of the Markets page use the same link.
+
+## Limits of the demo
+
+It resets. Credits, positions, orders and history start again at each reload, or with Reset demo account.
+It stays in your browser. Nothing is stored on a server and nothing is shared between devices.
+It has no funding. See Funding.
+
+A paper result is not a forecast
+The index is simulated. A gain in the demo says nothing about a real market.
+
+Tell us what is unclear on X, at @gachizfun.
+
+
+# Market, limit and stop
+Three ways to open: now, at a better price you set, or once the index breaks a level. Plus a target and a stop loss.
+
+Choose the order type under the side, on the ticket: Market opens now, Limit waits for a better price, Stop waits for the index to break a level.
+
+## Three order types
+
+Type | It opens | Use it to |
+Market | Now, at the level of the index. | Get in at once. |
+Limit | When the index reaches your price, at that price. | Wait for a better entry. |
+Stop | When the index crosses your price, at the level of that second. | Follow a move once it has started. |
+
+## Market
+
+A market order opens the position at the level of the index when you press the button. The ticket calls that level Entry, est.: an estimate, because the index moves every second. The position takes the level of the second it opens.
+
+## Limit
+
+A limit order names a price, in points. The demo keeps the order until the index reaches it.
+
+Limit. The second order type. A price field appears next to the margin.
+Limit, pts. The level you want, in points. Below the index for a long, above it for a short.
+Entry at limit. The estimates now start from your price, not from the current level.
+Place. The button changes to Place limit long. The order then waits in Open orders.
+
+Side | Where to set the limit | It fills when |
+Long | Below the index | the index falls to your price, or under it. |
+Short | Above the index | the index rises to your price, or over it. |
+
+A limit on the wrong side does not wait
+A long limit at or above the index, or a short limit at or below it, opens now at the current level. The button then reads Open, not Place limit.
+
+## Stop
+
+A stop order also names a price, in points, but it waits on the other side of the index: it opens once the index has moved through your price.
+
+Side | Where to set the stop | It fills when |
+Long | Above the index | the index rises to your price, or over it. |
+Short | Below the index | the index falls to your price, or under it. |
+
+A stop fills at the level of the second the index crosses it, which can be a little past your price. The ticket shows Entry at stop, est. and the button reads Place stop long. On the wrong side, the ticket refuses it: A long stop sits above the index.
+
+## Reduce only
+
+Turn on Reduce only to shrink a position instead of opening one. The order only closes positions of the other side on the market in view, the oldest first.
+
+The field changes. It reads Value to reduce, credits: the value of the positions to close, not a margin.
+Leverage is off. A reduce opens nothing, so it takes no leverage and no liquidation price.
+The button changes. It reads Reduce long PKMN-IDX for a long that reduces a short.
+It needs a position. With nothing to reduce, the ticket says so: Reduce only: no short position on PKMN-IDX.
+
+## Target and stop loss
+
+Turn on TP / SL to give a new position its exits, in points. Both fields are optional.
+
+Field | For a long | For a short | When the index reaches it |
+Target, pts | Above the entry | Below the entry | The position closes at the target. |
+Stop loss, pts | Between the liquidation price and the entry | Between the entry and the liquidation price | The position closes at the level of that second. |
+
+Both wait in Open orders with their position, and leave with it. On an open position, the TP / SL button of its row sets or changes them.
+
+A stop loss sits before the liquidation
+A stop loss past the liquidation price would never be reached: the ticket refuses it, and says where it has to sit.
+
+## Set a limit from the book
+
+The order book sits next to the chart, with the last trades under it. Press a price in it: the ticket switches to Limit, with that price in the field. The three buttons above the book group its levels into wider steps.
+
+Grouping. Groups the levels of the book into wider steps.
+Asks. Simulated sell levels above the index, with their size and running total.
+Press a price. It fills the ticket with a limit at that price.
+Level, spread. The index now, and the gap between the first ask and the first bid.
+Bids. Simulated buy levels below the index.
+Trades. The last simulated trades, newest first.
+Simulated. The tag says it: no real order rests here.
+
+## While it waits
+
+It is listed. The Open orders tab shows it, and its count goes up.
+Its margin is set aside. It leaves your available credits and counts as In use.
+It is on the chart. A dashed grey line marks its price, when that price is in range.
+It fills. A limit opens at its own price, a stop at the level of the second. An alert says Limit order filled or Stop order filled.
+
+## The Open orders tab
+
+Column | What it is |
+Order | The index, the side and the leverage. |
+Type | Limit, Stop, Target or Stop loss. |
+Trigger, pts | The price it waits for. |
+Value | Margin times leverage. |
+Margin held | What is set aside for it. |
+Reduce only | Whether it can only shrink a position. |
+Placed | The time you placed it. |
+Cancel | Removes the order. Its margin is available again. Cancel all, above the tabs, removes them all. |
+
+## The Order history tab
+
+Every paper order of the session, newest first: time, order, type, price, value and status, Filled, Cancelled or Rejected: nothing to reduce.
+
+## A worked example
+
+With the demo settings. PKMN-IDX is at 1,240.00 points. You place a long limit at 1,235.04 points, 300 credits of margin, 5×.
+
+Size: 1,500.00. Set aside while it waits: 300.00 credits.
+The index falls to 1,235.04: the position opens there, not lower.
+Its liquidation price is 1,018.91 points, computed from the limit.
+
+## What can go wrong
+
+The ticket says | Why |
+Enter a price in points, above 0. | The limit field holds something that is not a positive number. |
+A long stop sits above the index. | A stop on the wrong side of the index would open at once: the ticket refuses it. |
+Stop loss sits between the liquidation price and 1,240.00. | The stop loss is past the liquidation price, or on the wrong side of the entry. |
+Demo limit: 8 open orders at once. | Cancel one before you place another. |
+Order rejected | A reduce only order that waited found nothing left to reduce when it filled. |
+
+A limit or a stop can also never fill: if the index does not reach your price, it waits until you cancel it, reset the demo or reload.
+
+## On Gachiz
+
+Parameter | State |
+Order types at launch | Not announced yet |
+Stop orders | Not announced yet |
+Target and stop loss | Not announced yet |
+Reduce only | Not announced yet |
+
+
+# Positions
+What an open position shows, column by column, and what closing it does.
+
+Open the Positions tab under the chart. Read a row from left to right: market and side, size, entry and mark, the distance to liquidation, then the result so far.
+
+Tabs. Positions, Open orders, Order history, Trade history and Account, with their counts.
+Close all. Closes every open position at once.
+Position. The index, the side and the leverage chosen at the open.
+Value. Size is the quantity of index. Value is margin times leverage, in credits.
+Entry, mark. The level at the open, and the level now.
+Liquidation. Liq. is the level where the position closes by itself. To liq. is the room left before it.
+PnL. The result so far, in credits and as a share of the margin, with its trace.
+TP / SL, Close. Set the target and the stop loss, or close the position now.
+
+## Column by column
+
+Column | What it is |
+Position | The index, the side and the leverage chosen at the open. |
+Size | The quantity of index held, in units of the index. |
+Value | Margin times leverage, in credits. |
+Entry | The level at the open, in points. |
+Mark | The level now. It moves one step per second. |
+Liq. | The level where the position closes by itself. Fixed at the open. |
+To liq. | The room left before that level, in percent, with a bar that empties as the index nears it. |
+Margin | What is locked behind the position. |
+PnL | The result so far, in credits, with its trace. |
+PnL % | The same result as a share of the margin. |
+TP / SL | The target and the stop loss, or none. |
+TP / SL Close | Set the exits of the position, or close it now. |
+
+Press a column title to sort the rows by it.
+
+## How PnL is counted
+
+Take the move of the index since the entry, in percent.
+Apply it to the position size. For a short, flip the sign.
+That is the PnL in credits. The second figure is the same PnL as a share of your margin.
+
+Example
+A long of 2,500.00 opened at 1,240.00 points, index now at 1,302.00: up 5%, so +125.00 credits, or +25% of a margin of 500.
+
+Unrealized PnL. The result if you closed now. It moves with the index. The tab shows this one.
+Realized PnL. The result once the position is closed. It no longer moves. The Trade history tab keeps it.
+
+## Close a position
+
+Press Close
+The Close button is at the end of the row. There is no second step.
+
+The demo settles it
+It takes the PnL at the current level and gives the margin back with the result.
+
+Read the alert
+It says Closed PKMN-IDX long, with the market and the side, then the result in credits.
+
+Close all, above the tabs, closes every open position at once. The result of a close can never be worse than the margin of the position.
+
+## Exits that close it for you
+
+Exit | When | The alert says |
+Target | The index reaches the target of the position. | Target hit: PKMN-IDX long |
+Stop loss | The index reaches its stop loss. | Stop loss: PKMN-IDX long |
+Liquidation | The index reaches its liquidation price. | Liquidated: PKMN-IDX long |
+
+Set or change the target and the stop loss of an open position with the TP / SL button of its row. See Target and stop loss.
+
+## The demo account
+
+The panel under the ticket adds everything up. The status bar repeats equity and available, so they stay in view when the panel does not fit.
+
+Wallet state. The demo works without a wallet. Connected, it shows your address, read only.
+Equity. Available plus in use plus open PnL.
+Available. What a new order can use.
+In use. Margins of open positions, and of orders that wait.
+Open PnL. The result of all open positions together.
+
+## The Trade history tab
+
+Column | What it is |
+Time | When it happened, on your clock. |
+Fill | Open, Close, Reduce or Liquidation, with the index and the side. |
+Through | What made it happen: Market, Limit, Stop, Target, Stop loss, Close all or Liquidation. |
+Price, pts | The level of the fill. |
+Size | The quantity filled. |
+Value | Size times price, in credits. |
+Realized PnL | The result of a close, a reduce or a liquidation. |
+
+## The Account tab
+
+Equity and available. The same two numbers as the panel.
+Margin used and unrealized PnL. What the open positions and the waiting orders hold, and their result so far.
+Realized PnL, session. The sum of every close, reduce and liquidation since the page opened.
+Paper volume and fills, session. How much you traded, and how many fills.
+Equity, this session. A line of the equity of the demo account since the page opened.
+
+History and account figures only cover the session: a reload or Reset demo account empties them.
+
+## What can go wrong
+
+The row is gone. The position was liquidated, or reached its target or its stop loss. An alert said so, and Trade history has the line. See Liquidation.
+The Liq. line is not on the chart. It is drawn only when its level is in range. The column always shows it.
+Everything is gone. The page was reloaded, or the demo account was reset. The demo starts again each time.
+
+
+# Fees
+What a perps market can charge, what the demo charges, and what Gachiz has announced: nothing yet.
+
+Count the costs of any perps market before you trade on it. There are usually four.
+
+## The usual costs
+
+Trading fee. A share of the position size, charged when you open and when you close.
+Funding. Paid or received while the position is open. See Funding.
+Gas. The network fee of each transaction, in ETH on Robinhood Chain.
+Liquidation fee. Many markets charge one when a position is liquidated.
+
+## In the demo
+
+The demo charges nothing. A paper position only gains or loses with the index.
+
+Cost | In the demo |  |
+Trading fee | None | Demo setting |
+Funding | None | Demo setting |
+Gas | None: nothing is sent on-chain | Demo setting |
+Liquidation | The whole margin of the position, and no extra fee | Demo setting |
+
+## How a fee adds up
+
+General math, not Gachiz parameters. A fee is a rate applied to the position size, not to the margin.
+
+Margin 500 at 5×: a size of 2,500.00.
+A rate of 0.05% on that size is 1.25 at the open, and about the same at the close.
+The same margin at twice the leverage pays twice the fee.
+
+## On Gachiz
+
+Cost | State |
+Trading fee | Not announced yet |
+Funding | Not announced yet |
+Liquidation fee | Not announced yet |
+Team share of the fees | Not announced yet |
+
+## Today
+
+The preview and the demo take nothing from you: no order is sent, no funds move, no gas is spent. Demo credits have no value.
+
+Written before trading opens
+Fees and the team share will be written on this page, with a worked example, before any trading with funds.
+
+
+# What Connect reads
+Two public facts: your address and your network. Nothing is signed, nothing is sent.
+
+Use this page as a checklist: the preview should never ask for more than what is listed here.
+
+## Gesture by gesture
+
+Gesture | On gachiz.fun | How |
+See your address | Yes | Your wallet shares it once you approve. |
+See your network | Yes | The chain id is read from your wallet. |
+Follow a change | Yes | If you change account or network in your wallet, the site updates what it shows. |
+Ask to switch network | Only if you press Switch network | Your wallet then asks you to confirm. It is not a transaction. |
+Send a transaction | No | The preview has none. |
+Ask for a signature | No | Nothing is signed. |
+Ask for a seed phrase or a private key | Never | No page of Gachiz does. |
+
+## What crosses, what does not
+
+What crosses from your wallet to the site, and what never does.
+
+## In the demo
+
+The demo reads the same two things, through the same window. Paper orders never touch your wallet, and the demo works with no wallet at all.
+
+## What the site keeps
+
+Your address, for the visit. It is held by the page while it is open. Press Disconnect, or close the page, and it is gone.
+One preference. Sound on or sound off, kept in your browser. The sounds are soft clicks.
+Nothing about your trades. Demo credits, positions and history live in the page and reset at each reload.
+No account. The preview has no sign-up and no form.
+
+## Spot a fake
+
+Check the address bar. The site is gachiz.fun.
+Check the account. The X account is @gachizfun.
+Check the ask. A page that asks for a seed phrase, a private key or a payment to connect is not Gachiz.
+Check the token address. The GACHIZ token has no contract address yet. Any address you are shown is not ours. See Status.
+
+## Your side of it
+
+Read every request. Your wallet shows what a site asks. A request to connect only shares your address.
+Keep your seed phrase offline. No site needs it. Ever.
+Disconnect when done. Disconnect is in the menu of your address.
+
+When trading opens
+A real order will need a transaction that you approve in your wallet. This page will list each one before that day.
+
+
+# Risks
+A perp can cost you the whole margin. Indexes of collectibles add risks of their own.
+
+Read this page before any trade with funds: it lists what can go wrong, without softening it.
+
+## Risks of any perp
+
+You can lose the whole margin. A move against you is taken from it until nothing is left.
+Leverage cuts both ways. It multiplies the losses as much as the gains. See the table on Leverage and margin.
+Liquidation can be fast. A sharp move can close a position before you react. You do not choose the moment.
+Funding adds up. Held for long, a position can pay more funding than expected.
+Fees add up. Opening and closing often costs a fee each time, on the full size.
+
+## Risks of collectibles
+
+Few sales. Collectibles trade rarely. An index built on few sales can lag, then jump.
+Hard to price. Two copies of the same item can sell far apart. The price source matters, and it is not announced yet.
+Moved by taste. A card game can fall out of favour for reasons no chart shows.
+Moved by its owner. A new set, a reprint or a change of rules from the owner of a license can move the prices of its cards.
+Thin markets. A market with few traders can move a lot on one order.
+
+## Risks of a preview
+
+Parameters can change. Nothing marked Not announced yet is settled.
+Software and networks can fail. A contract, a wallet or the network itself can break or stall.
+Fakes appear. A new project attracts copies. See Spot a fake.
+
+## Risks of a demo habit
+
+Credits are not funds. Losing 500 demo credits teaches the math, not the feeling.
+The index is simulated. It has no news, no crowd and no gaps. A real market has all three.
+A reload forgives everything. A real position does not reset.
+
+## Where each risk is explained
+
+Risk | Page |
+Losing the margin | Leverage and margin |
+Being liquidated | Liquidation |
+Paying to hold | Funding |
+Paying to trade | Fees |
+A fake site, a fake address | Spot a fake |
+
+## What you can do
+
+Size small. A position you can lose in full is the only kind to open.
+Know the line. Read the liquidation price before you open, not after.
+Read the page of each cost. Fees and Funding, once their parameters are announced.
+
+No promise
+Nothing in these docs is financial advice, or a forecast of any result.
+
+
+# Glossary
+The words of these docs and of the trade screen, one line each.
+
+Look up a word here, then follow the link to its page. Words that are labels of the trade screen are written as on screen.
+
+## Market words
+
+Index | One number that follows the sales of many cards. See Index price.
+
+Point | The unit of an index level. A score, not a price.
+
+Candle | The open, high, low and close of the index over one slice of time.
+
+Perp | A perpetual: a position on a price move, with no end date. See Perpetuals.
+
+Side | Long or short.
+
+Long | The side that gains when the index rises.
+
+Short | The side that gains when the index falls.
+
+Funding | A payment between longs and shorts while a position is open. See Funding.
+
+Mark price | The level used to value an open position. On the demo screen: Mark.
+
+Collateral | The asset a margin is paid in. Not announced yet for Gachiz.
+
+## Position words
+
+Margin | The amount locked behind a position. See Leverage and margin.
+
+Leverage | Position size divided by margin.
+
+Position size | Margin times leverage. Fees and moves apply to it.
+
+Entry | The index level when a position opened.
+
+Liq. | The liquidation price: the level where the market closes the position. See Liquidation.
+
+To liq. | The room left before the liquidation price, in percent of the index.
+
+Maintenance margin | The share of the size a position must keep before it is liquidated.
+
+PnL | The gain or the loss of a position. Unrealized while open, realized once closed.
+
+Open PnL | The PnL of all open positions together.
+
+Close | End a position at the current level. See Positions.
+
+## Order words
+
+Market order | An order that opens now, at the current level. See Market and limit.
+
+Limit order | An order that waits for a price you set.
+
+Resting order | A limit order that has not filled yet. Listed in the Orders tab.
+
+Fill | The moment a waiting order becomes a position.
+
+Paper order | An order kept by the demo and never sent to a chain. See Trade screen.
+
+## Demo and wallet words
+
+Credits | The simulated unit of the demo. No value, reset at each reload.
+
+Equity | Available plus in use plus open PnL.
+
+Available | The credits a new order can use.
+
+In use | Margins of open positions, and of limit orders that wait.
+
+Book | The order book: levels where orders rest. In the demo it is drawn from the simulated index.
+
+Spread | The gap between the first ask and the first bid.
+
+Simulated index | An index computed in your browser. It does not follow real sales.
+
+Chain id | The number that names a network. 4663 for Robinhood Chain. See Network.
+
+Gas | The network fee of a transaction.
+
+Contract address | The address of a token on a network. The GACHIZ token has none yet. See Status.
+
+Seed phrase | The words that control a wallet. No site needs them.
